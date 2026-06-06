@@ -74,13 +74,21 @@
      3. Scroll reveal
   --------------------------------------------------------------- */
   var revealEls = $$('[data-reveal]');
+  function revealInView() {
+    var vh = window.innerHeight || document.documentElement.clientHeight;
+    revealEls.forEach(function (el) {
+      if (el.getBoundingClientRect().top < vh - 40) el.classList.add('visible');
+    });
+  }
   if ('IntersectionObserver' in window && !prefersReduced) {
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (en) {
         if (en.isIntersecting) { en.target.classList.add('visible'); io.unobserve(en.target); }
       });
-    }, { threshold: 0.12 });
+    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
     revealEls.forEach(function (el) { io.observe(el); });
+    revealInView();                       /* reveal above-the-fold instantly, no flash */
+    window.addEventListener('load', revealInView);
   } else {
     revealEls.forEach(function (el) { el.classList.add('visible'); });
   }
