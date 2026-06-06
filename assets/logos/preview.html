@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FORWARD — Gerb tizimi (vizual QA)</title>
+<style>
+  :root{
+    --navy:#0a0f1e; --deep:#0d1529; --surface:#111a30; --surface-2:#16203a;
+    --gold:#c9a84c; --gold-light:#e8c96a; --silver:#a8b2c8; --silver-dim:#6f7995;
+    --white:#f4f1eb; --border:rgba(201,168,76,0.20);
+    --tier1:#4e9eff; --tier2:#7c5cbf; --tier3:#c9a84c;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    background:
+      radial-gradient(1200px 600px at 50% -10%, rgba(201,168,76,0.06), transparent 60%),
+      var(--navy);
+    color:var(--white);
+    font-family:'DM Sans',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+    line-height:1.6; padding:48px 24px 96px; min-height:100vh;
+  }
+  .wrap{max-width:1100px;margin:0 auto;}
+  header{text-align:center;margin-bottom:48px;}
+  h1{
+    font-family:'Cormorant Garamond',Georgia,serif;
+    font-weight:600; font-size:clamp(2rem,5vw,3.2rem);
+    letter-spacing:.04em; color:var(--gold-light); margin-bottom:8px;
+  }
+  header p{color:var(--silver);font-size:.95rem;letter-spacing:.06em;}
+  h2{
+    font-family:'Cormorant Garamond',Georgia,serif;
+    font-weight:600;font-size:1.6rem;color:var(--white);
+    letter-spacing:.04em;margin:0 0 4px;
+  }
+  .sub{color:var(--silver-dim);font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:24px;}
+  section{
+    background:linear-gradient(180deg,var(--surface),var(--deep));
+    border:1px solid var(--border); border-radius:18px;
+    padding:32px; margin-bottom:28px;
+  }
+  .row{
+    display:flex;flex-wrap:wrap;align-items:flex-end;gap:40px;
+    justify-content:center;
+  }
+  .cell{display:flex;flex-direction:column;align-items:center;gap:10px;}
+  .cell .label{font-size:.72rem;letter-spacing:.12em;color:var(--silver-dim);text-transform:uppercase;}
+  .name{
+    margin-top:6px;font-family:'Cormorant Garamond',Georgia,serif;
+    font-size:1.05rem;color:var(--gold-light);letter-spacing:.08em;
+  }
+  img{display:block;}
+  .s48{width:48px;height:48px;}
+  .s96{width:96px;height:96px;}
+  .s200{width:200px;height:200px;}
+  .s16{width:16px;height:16px;}
+  .s32{width:32px;height:32px;}
+
+  /* Accent-background swatches to verify the crest reads on its tier color */
+  .swatches{display:flex;flex-wrap:wrap;gap:20px;justify-content:center;}
+  .swatch{
+    width:120px;height:120px;border-radius:14px;
+    display:flex;align-items:center;justify-content:center;
+    border:1px solid rgba(255,255,255,.08);
+  }
+  .bg-navy{background:var(--navy);}
+  .bg-deep{background:var(--deep);}
+  .bg-surface{background:var(--surface-2);}
+  .bg-white{background:var(--white);}
+  .bg-t1{background:rgba(78,158,255,.14);}
+  .bg-t2{background:rgba(124,92,191,.14);}
+  .bg-t3{background:rgba(201,168,76,.14);}
+  .swatch img{width:80px;height:80px;}
+
+  /* On-site context: a faux tier card row (48px crest is the on-site size) */
+  .cards{display:flex;flex-wrap:wrap;gap:20px;justify-content:center;}
+  .card{
+    width:240px;border-radius:16px;padding:22px 22px 26px;
+    background:linear-gradient(180deg,var(--surface-2),var(--deep));
+    border:1px solid var(--border);text-align:center;
+  }
+  .card .crest{width:64px;height:64px;margin:0 auto 12px;}
+  .card h3{font-family:'Cormorant Garamond',Georgia,serif;font-size:1.5rem;letter-spacing:.05em;margin-bottom:4px;}
+  .card.t1 h3{color:var(--tier1);} .card.t2 h3{color:var(--tier2);} .card.t3 h3{color:var(--tier3);}
+  .card p{color:var(--silver);font-size:.82rem;}
+  .legend{text-align:center;color:var(--silver-dim);font-size:.8rem;margin-top:8px;}
+  hr{border:none;border-top:1px solid var(--border);margin:8px 0 28px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>FORWARD — Heraldik gerb tizimi</h1>
+    <p>Vizual QA · Nexus → Dominion → Imperial · forward-mark · favicon</p>
+  </header>
+
+  <!-- ===== TIER CRESTS AT ALL SIZES ===== -->
+  <section>
+    <h2>Daraja gerblari</h2>
+    <div class="sub">48px (saytdagi o'lcham) · 96px · 200px</div>
+
+    <div class="row">
+      <div class="cell">
+        <img class="s48"  src="nexus.svg" alt="Nexus 48">
+        <img class="s96"  src="nexus.svg" alt="Nexus 96">
+        <img class="s200" src="nexus.svg" alt="Nexus 200">
+        <div class="name">NEXUS</div>
+        <div class="label">ko'k · poydevor</div>
+      </div>
+    </div>
+    <hr style="margin:28px 0;">
+    <div class="row">
+      <div class="cell">
+        <img class="s48"  src="dominion.svg" alt="Dominion 48">
+        <img class="s96"  src="dominion.svg" alt="Dominion 96">
+        <img class="s200" src="dominion.svg" alt="Dominion 200">
+        <div class="name">DOMINION</div>
+        <div class="label">binafsha · mahorat</div>
+      </div>
+    </div>
+    <hr style="margin:28px 0;">
+    <div class="row">
+      <div class="cell">
+        <img class="s48"  src="imperial.svg" alt="Imperial 48">
+        <img class="s96"  src="imperial.svg" alt="Imperial 96">
+        <img class="s200" src="imperial.svg" alt="Imperial 200">
+        <div class="name">IMPERIAL</div>
+        <div class="label">oltin · cho'qqi</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SIDE-BY-SIDE ESCALATION CHECK ===== -->
+  <section>
+    <h2>Oilaviy izchillik (escalation)</h2>
+    <div class="sub">Bir xil qalqon · bir xil chegara · faqat emblema va bezak ko'tariladi</div>
+    <div class="row">
+      <div class="cell"><img class="s96" src="nexus.svg" alt="Nexus"><div class="name">Nexus</div></div>
+      <div class="cell"><img class="s96" src="dominion.svg" alt="Dominion"><div class="name">Dominion</div></div>
+      <div class="cell"><img class="s96" src="imperial.svg" alt="Imperial"><div class="name">Imperial</div></div>
+    </div>
+    <div class="legend">Uchchala gerb bir xil siluet va ikki chiziqli geraldik chegaraga ega.</div>
+  </section>
+
+  <!-- ===== ON-SITE CONTEXT (48px crest in a tier card) ===== -->
+  <section>
+    <h2>Saytdagi ko'rinish (daraja kartalari)</h2>
+    <div class="sub">Gerblar 48–64px da kartalarda</div>
+    <div class="cards">
+      <div class="card t1">
+        <img class="crest" src="nexus.svg" alt="Nexus">
+        <h3>Nexus</h3>
+        <p>Poydevor · bog'lanish · birinchi uchqun</p>
+      </div>
+      <div class="card t2">
+        <img class="crest" src="dominion.svg" alt="Dominion">
+        <h3>Dominion</h3>
+        <p>Mahorat · yuksalish · boshqaruv</p>
+      </div>
+      <div class="card t3">
+        <img class="crest" src="imperial.svg" alt="Imperial">
+        <h3>Imperial</h3>
+        <p>Oliy hokimiyat · cho'qqi</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== BACKGROUND CONTRAST CHECK ===== -->
+  <section>
+    <h2>Fon kontrasti tekshiruvi</h2>
+    <div class="sub">Gerb turli fonlarda o'qiladimi</div>
+    <div class="swatches">
+      <div class="swatch bg-navy"><img src="imperial.svg" alt="on navy"></div>
+      <div class="swatch bg-deep"><img src="imperial.svg" alt="on deep"></div>
+      <div class="swatch bg-surface"><img src="imperial.svg" alt="on surface"></div>
+      <div class="swatch bg-t1"><img src="nexus.svg" alt="on tier1"></div>
+      <div class="swatch bg-t2"><img src="dominion.svg" alt="on tier2"></div>
+      <div class="swatch bg-t3"><img src="imperial.svg" alt="on tier3"></div>
+      <div class="swatch bg-white"><img src="imperial.svg" alt="on white"></div>
+    </div>
+    <div class="legend">Eslatma: gerblar navy/qorong'i fon uchun mo'ljallangan; oq fon faqat nazorat uchun.</div>
+  </section>
+
+  <!-- ===== FORWARD MARK + FAVICON ===== -->
+  <section>
+    <h2>Brend belgisi va favicon</h2>
+    <div class="sub">forward-mark.svg (nav logo) · favicon.svg (tab)</div>
+    <div class="row">
+      <div class="cell">
+        <img class="s48"  src="forward-mark.svg" alt="mark 48">
+        <img class="s96"  src="forward-mark.svg" alt="mark 96">
+        <img class="s200" src="forward-mark.svg" alt="mark 200">
+        <div class="name">forward-mark</div>
+      </div>
+    </div>
+    <hr style="margin:28px 0;">
+    <div class="row">
+      <div class="cell"><img class="s16" src="../icons/favicon.svg" alt="favicon 16"><div class="label">16px</div></div>
+      <div class="cell"><img class="s32" src="../icons/favicon.svg" alt="favicon 32"><div class="label">32px</div></div>
+      <div class="cell"><img class="s96" src="../icons/favicon.svg" alt="favicon 96"><div class="label">96px</div></div>
+      <div class="cell"><div class="name" style="margin:0;">favicon</div></div>
+    </div>
+  </section>
+</div>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 152" fill="none" role="img" aria-labelledby="domTitle domDesc">
+  <title id="domTitle">Dominion darajasi gerbi</title>
+  <desc id="domDesc">Qalqon ichida markaziy yuqoriga ko'tariluvchi minora-shevron, ikki yondan ko'tariluvchi ustunlar, tepasida uch uchli toj, ostida ikki dafna bargi — Dominion: mahorat, yuksalish va boshqaruv. Binafsha urg'u.</desc>
+
+  <defs>
+    <linearGradient id="dm-fill" x1="64" y1="30" x2="64" y2="142" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#7c5cbf" stop-opacity="0.22"/>
+      <stop offset="0.55" stop-color="#7c5cbf" stop-opacity="0.06"/>
+      <stop offset="1" stop-color="#0a0f1e" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="dm-gold" x1="24" y1="4" x2="104" y2="142" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#e8c96a"/>
+      <stop offset="0.5" stop-color="#c9a84c"/>
+      <stop offset="1" stop-color="#a8862f"/>
+    </linearGradient>
+  </defs>
+
+  <!-- ===== SHARED SHIELD (identical path across all three tiers) ===== -->
+  <path d="M64 30 L108 38 V92 C108 118 88 134 64 142 C40 134 20 118 20 92 V38 Z" fill="url(#dm-fill)"/>
+  <path d="M64 30 L108 38 V92 C108 118 88 134 64 142 C40 134 20 118 20 92 V38 Z"
+        stroke="url(#dm-gold)" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M64 36 L102 42.8 V91 C102 113.5 84.5 128 64 135.4 C43.5 128 26 113.5 26 91 V42.8 Z"
+        stroke="#c9a84c" stroke-width="1.6" stroke-linejoin="round" stroke-opacity="0.85"/>
+
+  <!-- ===== TIER ORNAMENT (Dominion — 3-point coronet above the shield) ===== -->
+  <!-- Coronet band -->
+  <path d="M45 26 H83" stroke="url(#dm-gold)" stroke-width="3" stroke-linecap="round"/>
+  <!-- Three rising points -->
+  <path d="M45 26 L51 9 L57 21 L64 4 L71 21 L77 9 L83 26"
+        fill="#7c5cbf" fill-opacity="0.24" stroke="url(#dm-gold)" stroke-width="2.6"
+        stroke-linejoin="round" stroke-linecap="round"/>
+  <!-- Jewels at the coronet tips -->
+  <g fill="#e8c96a">
+    <circle cx="51" cy="9"  r="1.9"/>
+    <circle cx="64" cy="4"  r="2.2"/>
+    <circle cx="77" cy="9"  r="1.9"/>
+  </g>
+
+  <!-- ===== BASE LAUREL (two short strokes — second tier of ornament) ===== -->
+  <g stroke="url(#dm-gold)" stroke-width="2.4" stroke-linecap="round" fill="none" stroke-opacity="0.9">
+    <path d="M52 129 C44 125 41 119 41 112"/>
+    <path d="M76 129 C84 125 87 119 87 112"/>
+    <path d="M47 120 C43 120 41 118 40 114"/>
+    <path d="M81 120 C85 120 87 118 88 114"/>
+  </g>
+
+  <!-- ===== INNER EMBLEM (central tower/chevron + flanking ascending bars) ===== -->
+  <!-- Flanking ascending bars (violet base, gold cap) -->
+  <g stroke="#7c5cbf" stroke-width="2.8" stroke-linecap="round" stroke-opacity="0.9">
+    <path d="M41 117 V97"/>
+    <path d="M87 117 V97"/>
+  </g>
+  <g stroke="url(#dm-gold)" stroke-width="2.6" stroke-linecap="round">
+    <path d="M41 117 V101"/>
+    <path d="M87 117 V101"/>
+  </g>
+
+  <!-- Central tower body -->
+  <path d="M54 118 V78 L64 64 L74 78 V118 Z" fill="#7c5cbf" fill-opacity="0.18"
+        stroke="url(#dm-gold)" stroke-width="2.8" stroke-linejoin="round"/>
+  <!-- Ascending chevrons inside the tower -->
+  <g stroke="#7c5cbf" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M57 108 L64 99 L71 108"/>
+    <path d="M57 96 L64 87 L71 96"/>
+  </g>
+  <!-- Apex jewel where the tower meets its peak -->
+  <path d="M64 60 L69 67 L64 74 L59 67 Z" fill="#7c5cbf" fill-opacity="0.32"
+        stroke="url(#dm-gold)" stroke-width="2.4" stroke-linejoin="round"/>
+  <circle cx="64" cy="67" r="1.7" fill="#e8c96a"/>
+</svg>

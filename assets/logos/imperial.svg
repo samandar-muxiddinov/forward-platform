@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 152" fill="none" role="img" aria-labelledby="impTitle impDesc">
+  <title id="impTitle">Imperial darajasi gerbi</title>
+  <desc id="impDesc">Eng hashamatli gerb: tepada nur sochuvchi quyosh va to'liq geometrik toj, qalqonni ikki yondan dafna gulchambari qurshagan, markazda sakkiz nurli emblema — Imperial: oliy hokimiyat va cho'qqi. Oltin urg'u.</desc>
+
+  <defs>
+    <linearGradient id="im-fill" x1="64" y1="30" x2="64" y2="142" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#e8c96a" stop-opacity="0.24"/>
+      <stop offset="0.55" stop-color="#c9a84c" stop-opacity="0.07"/>
+      <stop offset="1" stop-color="#0a0f1e" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="im-gold" x1="24" y1="2" x2="104" y2="142" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#e8c96a"/>
+      <stop offset="0.5" stop-color="#c9a84c"/>
+      <stop offset="1" stop-color="#a8862f"/>
+    </linearGradient>
+    <radialGradient id="im-sun" cx="64" cy="15" r="15" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#e8c96a" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#c9a84c" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- ===== LAUREL WREATH (embraces the shield sides, sits behind the frame) ===== -->
+  <g stroke="url(#im-gold)" stroke-width="2.4" stroke-linecap="round" fill="none" stroke-opacity="0.92">
+    <!-- left vine + leaves -->
+    <path d="M22 60 C12 78 12 102 22 120"/>
+    <path d="M19 70 C12 68 9 71 8 76"/>
+    <path d="M16 84 C9 83 6 86 5 91"/>
+    <path d="M16 99 C9 99 6 103 6 108"/>
+    <path d="M20 112 C13 113 11 117 11 122"/>
+    <!-- right vine + leaves (mirror) -->
+    <path d="M106 60 C116 78 116 102 106 120"/>
+    <path d="M109 70 C116 68 119 71 120 76"/>
+    <path d="M112 84 C119 83 122 86 123 91"/>
+    <path d="M112 99 C119 99 122 103 122 108"/>
+    <path d="M108 112 C115 113 117 117 117 122"/>
+  </g>
+  <!-- Wreath base tie -->
+  <path d="M58 126 H70" stroke="url(#im-gold)" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- ===== SHARED SHIELD (identical path across all three tiers) ===== -->
+  <path d="M64 30 L108 38 V92 C108 118 88 134 64 142 C40 134 20 118 20 92 V38 Z" fill="url(#im-fill)"/>
+  <path d="M64 30 L108 38 V92 C108 118 88 134 64 142 C40 134 20 118 20 92 V38 Z"
+        stroke="url(#im-gold)" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M64 36 L102 42.8 V91 C102 113.5 84.5 128 64 135.4 C43.5 128 26 113.5 26 91 V42.8 Z"
+        stroke="#c9a84c" stroke-width="1.6" stroke-linejoin="round" stroke-opacity="0.85"/>
+
+  <!-- ===== TIER ORNAMENT (Imperial — radiant sun + full crown) ===== -->
+  <!-- Sun glow -->
+  <circle cx="64" cy="15" r="15" fill="url(#im-sun)"/>
+  <!-- Radiant rays -->
+  <g stroke="url(#im-gold)" stroke-width="2" stroke-linecap="round">
+    <path d="M64 1 V7"/>
+    <path d="M49 5 L52 10.5"/>
+    <path d="M79 5 L76 10.5"/>
+    <path d="M40 15 H46"/>
+    <path d="M88 15 H82"/>
+  </g>
+  <!-- Full geometric crown -->
+  <path d="M44 28 L46 13 L54 21 L59 11 L64 3 L69 11 L74 21 L82 13 L84 28 Z"
+        fill="#c9a84c" fill-opacity="0.22" stroke="url(#im-gold)" stroke-width="2.6"
+        stroke-linejoin="round"/>
+  <!-- Crown band -->
+  <path d="M44 28 H84" stroke="url(#im-gold)" stroke-width="3" stroke-linecap="round"/>
+  <!-- Crown jewels -->
+  <g fill="#e8c96a">
+    <circle cx="64" cy="5"  r="2.3"/>
+    <circle cx="54" cy="21" r="1.9"/>
+    <circle cx="74" cy="21" r="1.9"/>
+    <circle cx="46" cy="14" r="1.6"/>
+    <circle cx="82" cy="14" r="1.6"/>
+  </g>
+
+  <!-- ===== INNER EMBLEM (central radiant emblem — sovereignty) ===== -->
+  <!-- Radiant burst behind the central star -->
+  <g stroke="url(#im-gold)" stroke-width="2.2" stroke-linecap="round" stroke-opacity="0.9">
+    <path d="M64 58 V52"/>
+    <path d="M64 110 V116"/>
+    <path d="M46 84 H40"/>
+    <path d="M82 84 H88"/>
+    <path d="M51.5 71.5 L47 67"/>
+    <path d="M76.5 71.5 L81 67"/>
+    <path d="M51.5 96.5 L47 101"/>
+    <path d="M76.5 96.5 L81 101"/>
+  </g>
+  <!-- Outer diamond frame -->
+  <path d="M64 60 L86 84 L64 108 L42 84 Z" fill="#c9a84c" fill-opacity="0.10"
+        stroke="url(#im-gold)" stroke-width="2.6" stroke-linejoin="round"/>
+  <!-- Eight-point radiant star (sovereign emblem) -->
+  <path d="M64 64 L67.5 76.5 L80 73 L71.5 82.5 L84 84 L71.5 85.5 L80 95 L67.5 91.5 L64 104 L60.5 91.5 L48 95 L56.5 85.5 L44 84 L56.5 82.5 L48 73 L60.5 76.5 Z"
+        fill="#c9a84c" fill-opacity="0.30" stroke="url(#im-gold)" stroke-width="2.4"
+        stroke-linejoin="round"/>
+  <!-- Central jewel -->
+  <circle cx="64" cy="84" r="4" fill="#0d1529" stroke="url(#im-gold)" stroke-width="2.2"/>
+  <circle cx="64" cy="84" r="1.7" fill="#e8c96a"/>
+</svg>

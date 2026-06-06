@@ -1,0 +1,7 @@
+# FORWARD Platform — security contact (RFC 9116)
+# TODO: replace the e-mail and domain with your real values before launch.
+
+Contact: mailto:security@forward.uz
+Expires: 2027-06-06T00:00:00.000Z
+Preferred-Languages: uz, en
+Canonical: https://forward.uz/.well-known/security.txt

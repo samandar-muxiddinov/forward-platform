@@ -1,0 +1,68 @@
+{
+  "name": "FORWARD — Ta'lim Platformasi",
+  "short_name": "FORWARD",
+  "description": "O'zbekistondagi premium K-11 ta'lim platformasi. Bilimning Imperiyasi — onlayn darslar, daraja testi va ko'proq.",
+  "lang": "uz",
+  "dir": "ltr",
+  "start_url": "/index.html",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "theme_color": "#0a0f1e",
+  "background_color": "#0a0f1e",
+  "categories": ["education"],
+  "icons": [
+    {
+      "src": "/assets/icons/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/icons/maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Daraja testi",
+      "short_name": "Test",
+      "description": "Bilim darajangizni aniqlang",
+      "url": "/daraja-test.html",
+      "icons": [
+        {
+          "src": "/assets/icons/icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Ro'yxatdan o'tish",
+      "short_name": "Ro'yxat",
+      "description": "Platformaga qo'shiling",
+      "url": "/index.html#register",
+      "icons": [
+        {
+          "src": "/assets/icons/icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    }
+  ]
+}

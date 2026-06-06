@@ -1,0 +1,113 @@
+<!--
+  ╔══════════════════════════════════════════════════════════════════╗
+  ║  FORWARD Platform — Copy-paste-ready <head> SEO/PWA snippet     ║
+  ║  Paste the contents of this file inside the <head> of:          ║
+  ║    • index.html                                                  ║
+  ║    • daraja-test.html  (adjust title/description per page)       ║
+  ║                                                                  ║
+  ║  ORCHESTRATOR CHECKLIST:                                         ║
+  ║  1. Replace every occurrence of https://forward.uz with the      ║
+  ║     real production domain before going live.                    ║
+  ║  2. Generate assets/og/og-image.png by rasterizing               ║
+  ║     assets/og/og-image.svg at 1200×630 px.                       ║
+  ║  3. Generate assets/icons/icon-192.png, icon-512.png,            ║
+  ║     maskable-512.png, and apple-touch-icon.png from the brand    ║
+  ║     SVG icon (assets/icons/favicon.svg).                         ║
+  ╚══════════════════════════════════════════════════════════════════╝
+-->
+
+<!-- ── Encoding & Viewport ──────────────────────────────────────── -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- ── Page Identity ─────────────────────────────────────────────── -->
+<title>FORWARD — O'zbekistondagi premium ta'lim platformasi</title>
+<meta name="description"
+      content="FORWARD — O'zbekiston K-11 o'quvchilari uchun premium ta'lim platformasi. Onlayn darslar, daraja testi va shaxsiy o'quv dasturi.">
+<meta name="keywords"
+      content="ta'lim platformasi, onlayn ta'lim, o'zbekiston, K-11, daraja testi, FORWARD">
+<link rel="canonical" href="https://forward.uz/">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#0a0f1e">
+
+<!-- ── Open Graph (Facebook / LinkedIn / WhatsApp) ───────────────── -->
+<meta property="og:type"        content="website">
+<meta property="og:title"       content="FORWARD — Bilimning Imperiyasi">
+<meta property="og:description" content="O'zbekiston K-11 o'quvchilari uchun premium ta'lim platformasi. Daraja testidan o'ting va o'z o'quv yo'lingizni boshlang.">
+<meta property="og:url"         content="https://forward.uz/">
+<meta property="og:image"       content="https://forward.uz/assets/og/og-image.png">
+<meta property="og:image:width"  content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt"   content="FORWARD — Bilimning Imperiyasi ta'lim platformasi">
+<meta property="og:locale"      content="uz_UZ">
+<meta property="og:site_name"   content="FORWARD">
+
+<!-- ── Twitter Card ─────────────────────────────────────────────── -->
+<meta name="twitter:card"        content="summary_large_image">
+<meta name="twitter:title"       content="FORWARD — Bilimning Imperiyasi">
+<meta name="twitter:description" content="O'zbekiston K-11 o'quvchilari uchun premium ta'lim platformasi. Daraja testidan o'ting va o'z o'quv yo'lingizni boshlang.">
+<meta name="twitter:image"       content="https://forward.uz/assets/og/og-image.png">
+<meta name="twitter:image:alt"   content="FORWARD — Bilimning Imperiyasi ta'lim platformasi">
+
+<!-- ── PWA / App meta ────────────────────────────────────────────── -->
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="icon"     href="/assets/icons/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable"   content="yes">
+<meta name="apple-mobile-web-app-title"     content="FORWARD">
+<meta name="application-name"               content="FORWARD">
+<meta name="msapplication-TileColor"        content="#0a0f1e">
+<meta name="msapplication-TileImage"        content="/assets/icons/icon-192.png">
+
+<!-- ── JSON-LD Structured Data ──────────────────────────────────── -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "EducationalOrganization",
+      "@id": "https://forward.uz/#organization",
+      "name": "FORWARD",
+      "alternateName": "FORWARD Ta'lim Platformasi",
+      "url": "https://forward.uz/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://forward.uz/assets/icons/icon-512.png",
+        "width": 512,
+        "height": 512
+      },
+      "description": "O'zbekiston K-11 o'quvchilari uchun premium ta'lim platformasi. Onlayn darslar, daraja testi va shaxsiy o'quv dasturlari.",
+      "areaServed": {
+        "@type": "Country",
+        "name": "Uzbekistan",
+        "sameAs": "https://www.wikidata.org/wiki/Q265"
+      },
+      "inLanguage": "uz",
+      "sameAs": [
+        "https://t.me/forwarduz",
+        "https://instagram.com/forwarduz",
+        "https://youtube.com/@forwarduz"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://forward.uz/#website",
+      "url": "https://forward.uz/",
+      "name": "FORWARD — Bilimning Imperiyasi",
+      "description": "O'zbekiston K-11 o'quvchilari uchun premium ta'lim platformasi.",
+      "inLanguage": "uz",
+      "publisher": {
+        "@id": "https://forward.uz/#organization"
+      },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://forward.uz/?q={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+      }
+    }
+  ]
+}
+</script>

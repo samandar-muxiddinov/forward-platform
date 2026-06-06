@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- ===== SEO / META (asosiy; JSON-LD + OG docs/seo-head.html dan birlashtiriladi) ===== -->
+  <title>FORWARD — O'zbekistondagi premium ta'lim platformasi</title>
+  <meta name="description" content="FORWARD — 1–11 sinf o'quvchilari uchun o'zbek tilidagi zamonaviy ta'lim ekotizimi. Daraja testi, Nexus·Dominion·Imperial tizimi, xalqaro standartlardagi matematika va ingliz tili.">
+  <meta name="theme-color" content="#0a0f1e">
+  <link rel="canonical" href="https://forward.uz/">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph / Twitter (qisqa; to'liq to'plam docs/seo-head.html da) -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="FORWARD">
+  <meta property="og:title" content="FORWARD — Bilimning Imperiyasi">
+  <meta property="og:description" content="1–11 sinf uchun o'zbek tilidagi premium ta'lim platformasi. Daraja testidan o'tib, o'z guruhingni aniqla.">
+  <meta property="og:url" content="https://forward.uz/">
+  <meta property="og:image" content="https://forward.uz/assets/og/og-image.png">
+  <meta property="og:locale" content="uz_UZ">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="FORWARD — Bilimning Imperiyasi">
+  <meta name="twitter:description" content="1–11 sinf uchun o'zbek tilidagi premium ta'lim platformasi. Daraja testidan o'tib, o'z guruhingni aniqla.">
+  <meta name="twitter:image" content="https://forward.uz/assets/og/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="FORWARD — Bilimning Imperiyasi ta'lim platformasi">
+  <meta name="msapplication-TileColor" content="#0a0f1e">
+  <meta name="msapplication-TileImage" content="/assets/icons/icon-192.png">
+
+  <!-- ===== Structured data (schema.org) ===== -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "EducationalOrganization",
+        "@id": "https://forward.uz/#organization",
+        "name": "FORWARD",
+        "alternateName": "FORWARD Ta'lim Platformasi",
+        "url": "https://forward.uz/",
+        "logo": { "@type": "ImageObject", "url": "https://forward.uz/assets/icons/icon-512.png", "width": 512, "height": 512 },
+        "description": "O'zbekiston 1–11 sinf o'quvchilari uchun premium ta'lim platformasi. Onlayn darslar, daraja testi va shaxsiy o'quv dasturlari.",
+        "areaServed": { "@type": "Country", "name": "Uzbekistan", "sameAs": "https://www.wikidata.org/wiki/Q265" },
+        "inLanguage": "uz",
+        "sameAs": ["https://t.me/forward_uz", "https://instagram.com/forward.uz"]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://forward.uz/#website",
+        "url": "https://forward.uz/",
+        "name": "FORWARD — Bilimning Imperiyasi",
+        "description": "O'zbekiston 1–11 sinf o'quvchilari uchun premium ta'lim platformasi.",
+        "inLanguage": "uz",
+        "publisher": { "@id": "https://forward.uz/#organization" }
+      }
+    ]
+  }
+  </script>
+
+  <!-- ===== Security: meta-CSP (GitHub Pages kabi header qo'yib bo'lmaydigan hostlar uchun zaxira;
+       to'liq header-lar _headers / netlify.toml / vercel.json / .htaccess da) ===== -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; form-action 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; manifest-src 'self'; worker-src 'self'; upgrade-insecure-requests">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+
+  <!-- ===== PWA / Icons ===== -->
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="icon" href="/assets/icons/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="FORWARD">
+  <meta name="application-name" content="FORWARD">
+
+  <!-- ===== Fonts ===== -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=DM+Sans:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- ===== Styles ===== -->
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+<!-- Accessibility: skip link -->
+<a class="skip-link" href="#main">Asosiy kontentga o'tish</a>
+
+<!-- Decorative film-grain overlay -->
+<div class="grain" aria-hidden="true"></div>
+
+<!-- ============================= NAV ============================= -->
+<header class="nav" id="nav">
+  <div class="nav-inner container">
+    <a class="brand" href="#hero" aria-label="FORWARD — bosh sahifa">
+      <img class="brand-mark" src="assets/logos/forward-mark.svg" alt="" width="34" height="34" aria-hidden="true">
+      <span class="brand-word">FOR<span>WARD</span></span>
+    </a>
+
+    <nav class="nav-links" id="navMenu" aria-label="Asosiy menyu">
+      <a href="#divisions">Bo'limlar</a>
+      <a href="#tiers">Darajalar</a>
+      <a href="#features">Imkoniyatlar</a>
+      <a href="#pricing">Narxlar</a>
+      <a href="#faq">Savollar</a>
+      <a href="#contact">Aloqa</a>
+    </nav>
+
+    <div class="nav-actions">
+      <a class="btn btn-ghost btn-sm nav-test" href="daraja-test.html">Daraja testi</a>
+      <a class="btn btn-primary btn-sm" href="#register">Ro'yxatdan o'tish</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Menyuni ochish" aria-expanded="false" aria-controls="navMenu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ============================= HERO ============================= -->
+<section id="hero" class="hero">
+  <div class="hero-bg" aria-hidden="true"></div>
+  <div class="hero-grid" aria-hidden="true"></div>
+  <div class="hero-content container">
+    <p class="eyebrow hero-badge"><span class="dot" aria-hidden="true"></span>O'zbek tilidagi zamonaviy ta'lim ekotizimi</p>
+    <h1 class="hero-title">Bilimning <strong>Imperiyasi</strong></h1>
+    <p class="hero-sub">Boshlang'ichdan universitetgacha — har bir o'quvchiga uning darajasiga mos, xalqaro standartlarga javob beradigan ta'lim. Bir test bilan o'z guruhingni aniqla va yo'lni boshla.</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="daraja-test.html">Daraja testini boshlash</a>
+      <a class="btn btn-ghost" href="#divisions">Bo'limlarni ko'rish</a>
+    </div>
+    <ul class="hero-stats" role="list">
+      <li><span class="stat-num" data-count="3">3</span><span class="stat-label">Ta'lim bo'limi</span></li>
+      <li><span class="stat-num" data-count="3">3</span><span class="stat-label">Daraja tizimi</span></li>
+      <li><span class="stat-num" data-count="11" data-suffix="">1–11</span><span class="stat-label">Sinf qamrovi</span></li>
+      <li><span class="stat-num" data-count="2">2</span><span class="stat-label">Asosiy fan</span></li>
+    </ul>
+  </div>
+  <a class="hero-scroll" href="#why" aria-label="Pastga o'tish"><span></span></a>
+</section>
+
+<!-- ============================= WHY / VALUE ============================= -->
+<section id="why" class="section">
+  <div class="container">
+    <div class="section-head" data-reveal>
+      <p class="eyebrow">Nega FORWARD</p>
+      <h2 class="section-title">Bir platforma — <strong>butun ta'lim yo'li</strong></h2>
+      <p class="lead">Birinchi sinfdan universitet ostonasigacha bo'lgan yo'lni bitta tizimda, o'z ona tilingda, har bir o'quvchining darajasiga moslab.</p>
+    </div>
+    <div class="value-grid">
+      <article class="value-card" data-reveal>
+        <div class="value-ico" aria-hidden="true">1</div>
+        <h3>To'liq qamrov</h3>
+        <p>1–11 sinf: poydevordan universitet tayyorgarligigacha uzluksiz yo'l. Boshqa joyga o'tish shart emas.</p>
+      </article>
+      <article class="value-card" data-reveal>
+        <div class="value-ico" aria-hidden="true">2</div>
+        <h3>Darajaga moslik</h3>
+        <p>Kirish testi har bir o'quvchini aynan o'ziga mos guruhga joylaydi — na zerikarli, na og'ir.</p>
+      </article>
+      <article class="value-card" data-reveal>
+        <div class="value-ico" aria-hidden="true">3</div>
+        <h3>O'zbek tilida</h3>
+        <p>Sifatli, xalqaro standartlardagi kontent — to'liq o'zbek tilida, mahalliy o'quv dasturiga mos.</p>
+      </article>
+      <article class="value-card" data-reveal>
+        <div class="value-ico" aria-hidden="true">4</div>
+        <h3>Telefonga mos</h3>
+        <p>Mobil-birinchi, tez va offline ishlaydigan dizayn — sekin internetda ham muammosiz.</p>
+      </article>
+      <article class="value-card" data-reveal>
+        <div class="value-ico" aria-hidden="true">5</div>
+        <h3>O'yinlashtirilgan</h3>
+        <p>Nexus → Dominion → Imperial darajalari motivatsiya beradi, natijani ko'rsatadi.</p>
+      </article>
+      <article class="value-card" data-reveal>
+        <div class="value-ico" aria-hidden="true">6</div>
+        <h3>Sun'iy intellekt <span class="soon">tez orada</span></h3>
+        <p>Shaxsiy AI-repetitor: savollarga javob, moslashuvchan mashqlar, individual yo'l.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= DIVISIONS ============================= -->
+<section id="divisions" class="section section-alt">
+  <div class="container">
+    <div class="section-head" data-reveal>
+      <p class="eyebrow">Ta'lim yo'nalishlari</p>
+      <h2 class="section-title">Uch <strong>Bo'lim</strong> — bir maqsad</h2>
+      <p class="lead">Har bir o'quvchi o'z sinfiga va darajasiga mos bo'limga joylashtiriladi. Kontent va o'qitish uslubi har bir bo'limda o'ziga xos.</p>
+    </div>
+
+    <div class="divisions-grid">
+      <article class="division-card div-1" data-reveal>
+        <span class="division-no" aria-hidden="true">01</span>
+        <p class="division-sinf">1 – 4 sinf</p>
+        <h3 class="division-name">Boshlang'ich Poydevor</h3>
+        <p class="division-tag">Foundation</p>
+        <p class="division-desc">Matematika va ingliz tilining asosiy tushunchalari. Qiziqarli, o'yinli va interaktiv darslar orqali kuchli poydevor.</p>
+        <ul class="chips" role="list">
+          <li>Matematika</li><li>Ingliz tili</li><li>Interaktiv darslar</li>
+        </ul>
+        <a class="card-link" href="#register">Boshlash <span aria-hidden="true">→</span></a>
+      </article>
+
+      <article class="division-card div-2" data-reveal>
+        <span class="division-no" aria-hidden="true">02</span>
+        <p class="division-sinf">5 – 8 sinf</p>
+        <h3 class="division-name">Akademik Yuksalish</h3>
+        <p class="division-tag">Academic Ascent</p>
+        <p class="division-desc">Bilimlarni sayqallash, xalqaro sertifikatlar (IELTS, SAT) bilan tanishuv va boshlang'ich tayyorgarlik.</p>
+        <ul class="chips" role="list">
+          <li>Chuqur matematika</li><li>IELTS asoslari</li><li>Akademik ingliz tili</li>
+        </ul>
+        <a class="card-link" href="#register">Boshlash <span aria-hidden="true">→</span></a>
+      </article>
+
+      <article class="division-card div-3" data-reveal>
+        <span class="division-no" aria-hidden="true">03</span>
+        <p class="division-sinf">9 – 11 sinf</p>
+        <h3 class="division-name">Universitet Yo'li</h3>
+        <p class="division-tag">University Pathway</p>
+        <p class="division-desc">Yo'nalish aniqlash, xalqaro sertifikatlarga tayyorgarlik, universitet arizalari, esse va motivatsion xat.</p>
+        <ul class="chips" role="list">
+          <li>SAT / IELTS</li><li>Motivation Letter</li><li>University Essay</li>
+        </ul>
+        <a class="card-link" href="#register">Boshlash <span aria-hidden="true">→</span></a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= TIERS (heraldik gerblar) ============================= -->
+<section id="tiers" class="section">
+  <div class="container">
+    <div class="section-head" data-reveal>
+      <p class="eyebrow">Daraja tizimi</p>
+      <h2 class="section-title">Test natijasiga qarab <strong>guruhing</strong></h2>
+      <p class="lead">Kirish testidan o'tib, bilim darajangga mos guruhga joylashasan. Bu tizim har bir o'quvchiga eng mos ta'limni kafolatlaydi.</p>
+    </div>
+
+    <div class="tiers-grid">
+      <article class="tier-card nexus" data-reveal>
+        <div class="tier-crest">
+          <img src="assets/logos/nexus.svg" alt="Nexus darajasi gerbi" width="92" height="110" loading="lazy">
+        </div>
+        <h3 class="tier-name">Nexus</h3>
+        <p class="tier-range">55 – 70% · Boshlang'ich daraja</p>
+        <p class="tier-desc">Asosiy tushunchalarni mustahkamlash, individual e'tibor, qadamba-qadam rivojlanish. Har bir qadam aniq va tushunarli.</p>
+        <p class="tier-foot"><span class="tier-dot"></span>Tez rivojlanadigan guruh</p>
+      </article>
+
+      <article class="tier-card dominion" data-reveal>
+        <div class="tier-crest">
+          <img src="assets/logos/dominion.svg" alt="Dominion darajasi gerbi" width="92" height="110" loading="lazy">
+        </div>
+        <h3 class="tier-name">Dominion</h3>
+        <p class="tier-range">71 – 85% · O'rta daraja</p>
+        <p class="tier-desc">Yaxshi poydevorga ega o'quvchilar uchun. Chuqurroq mavzular, murakkablik ortib boradi, xalqaro standartlarga tayyorgarlik boshlanadi.</p>
+        <p class="tier-foot"><span class="tier-dot"></span>Intensiv rivojlanish</p>
+      </article>
+
+      <article class="tier-card imperial" data-reveal>
+        <div class="tier-crest">
+          <img src="assets/logos/imperial.svg" alt="Imperial darajasi gerbi" width="92" height="110" loading="lazy">
+        </div>
+        <h3 class="tier-name">Imperial</h3>
+        <p class="tier-range">86 – 100% · Yuqori daraja</p>
+        <p class="tier-desc">Eng yuqori darajadagi o'quvchilar uchun. Olimpiada, xalqaro musobaqalar va eng nufuzli universitetlarga tayyorgarlik.</p>
+        <p class="tier-foot"><span class="tier-dot"></span>Elite guruh</p>
+      </article>
+    </div>
+
+    <div class="tiers-cta" data-reveal>
+      <p>O'z darajangni bilmoqchimisan?</p>
+      <a class="btn btn-primary" href="daraja-test.html">Daraja testidan o'tish</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= HOW IT WORKS ============================= -->
+<section id="how" class="section section-alt">
+  <div class="container">
+    <div class="section-head" data-reveal>
+      <p class="eyebrow">Qanday ishlaydi</p>
+      <h2 class="section-title">To'rt qadamda <strong>boshla</strong></h2>
+    </div>
+    <ol class="steps" role="list">
+      <li class="step" data-reveal><span class="step-no">01</span><h3>Ro'yxatdan o'tish</h3><p>Ism, sinf va bog'lanish ma'lumotlarini kirit.</p></li>
+      <li class="step" data-reveal><span class="step-no">02</span><h3>Daraja testi</h3><p>Qisqa testdan o't — matematika va ingliz tili.</p></li>
+      <li class="step" data-reveal><span class="step-no">03</span><h3>Guruhga joylashish</h3><p>Natijaga ko'ra Nexus, Dominion yoki Imperial.</p></li>
+      <li class="step" data-reveal><span class="step-no">04</span><h3>O'qish va o'sish</h3><p>O'z guruhingda darajaga mos darslar bilan rivojlan.</p></li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============================= FEATURES ============================= -->
+<section id="features" class="section">
+  <div class="container">
+    <div class="section-head" data-reveal>
+      <p class="eyebrow">Imkoniyatlar</p>
+      <h2 class="section-title">O'rganishni <strong>yoqimli</strong> qiladigan tizim</h2>
+    </div>
+    <div class="feature-grid">
+      <article class="feature" data-reveal><h3>Interaktiv darslar</h3><p>Quruq matn emas — misollar, mashqlar va tushunarli izohlar bilan.</p></article>
+      <article class="feature" data-reveal><h3>Amaliy testlar</h3><p>Har mavzudan so'ng mustahkamlovchi testlar va tezkor tahlil.</p></article>
+      <article class="feature" data-reveal><h3>AI-repetitor <span class="soon">tez orada</span></h3><p>Savolingga o'zbek tilida javob beradigan shaxsiy yordamchi.</p></article>
+      <article class="feature" data-reveal><h3>Reyting va nishonlar <span class="soon">tez orada</span></h3><p>Sog'lom raqobat: liderlar jadvali, yutuq belgilари.</p></article>
+      <article class="feature" data-reveal><h3>Sertifikatlar <span class="soon">tez orada</span></h3><p>Bosqichlarni tugatganingda raqamli sertifikat.</p></article>
+      <article class="feature" data-reveal><h3>Offline rejim</h3><p>Internet zaif bo'lsa ham — sayt va darslar yuklab olinadi.</p></article>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= PRICING ============================= -->
+<section id="pricing" class="section section-alt">
+  <div class="container">
+    <div class="section-head" data-reveal>
+      <p class="eyebrow">Narxlar</p>
+      <h2 class="section-title">Hammaga ochiq, <strong>adolatli</strong> tariflar</h2>
+      <p class="lead">Bepul boshla, kerak bo'lganda yuqorilab bor. Quyidagi narxlar indikativ — platforma to'liq ishga tushganda yakuniy e'lon qilinadi.</p>
+    </div>
+
+    <div class="pricing-grid">
+      <article class="price-card nexus" data-reveal>
+        <h3 class="price-name">Nexus</h3>
+        <p class="price-val"><strong>Bepul</strong></p>
+        <ul class="price-list" role="list">
+          <li>Asosiy darslar (cheklangan)</li>
+          <li>Oyiga 5 ta amaliy test</li>
+          <li>Daraja testi</li>
+          <li>Reytingni ko'rish</li>
+        </ul>
+        <a class="btn btn-ghost btn-block" href="#register">Boshlash</a>
+      </article>
+
+      <article class="price-card dominion featured" data-reveal>
+        <span class="price-badge">Ommabop</span>
+        <h3 class="price-name">Dominion</h3>
+        <p class="price-val"><strong>$3–5</strong><span>/oy</span></p>
+        <ul class="price-list" role="list">
+          <li>To'liq o'quv dasturi</li>
+          <li>Cheksiz amaliy testlar</li>
+          <li>Asosiy AI-yordam <span class="soon">tez orada</span></li>
+          <li>Raqamli sertifikatlar</li>
+          <li>Reytingda ishtirok</li>
+        </ul>
+        <a class="btn btn-primary btn-block" href="#register">Tanlash</a>
+      </article>
+
+      <article class="price-card imperial" data-reveal>
+        <h3 class="price-name">Imperial</h3>
+        <p class="price-val"><strong>$8–12</strong><span>/oy</span></p>
+        <ul class="price-list" role="list">
+          <li>Dominionning hammasi</li>
+          <li>SAT / IELTS tayyorgarligi</li>
+          <li>To'liq AI-repetitor <span class="soon">tez orada</span></li>
+          <li>Tahlil va mentor yordami</li>
+          <li>To'liq offline rejim</li>
+        </ul>
+        <a class="btn btn-ghost btn-block" href="#register">Tanlash</a>
+      </article>
+    </div>
+
+    <p class="pay-note" data-reveal>To'lov tizimlari: <strong data-pay>Payme · Click · Uzum Bank</strong></p>
+  </div>
+</section>
+
+<!-- ============================= REGISTRATION ============================= -->
+<section id="register" class="section">
+  <div class="container reg-container">
+    <aside class="reg-info" data-reveal>
+      <p class="eyebrow">Ro'yxatdan o'tish</p>
+      <h2 class="section-title">Sayohating <strong>shu yerdan</strong> boshlanadi</h2>
+      <p class="lead">Ma'lumotlaringni kirit — biz siz bilan bog'lanamiz va daraja testini taqdim etamiz.</p>
+      <ol class="reg-steps" role="list">
+        <li><span class="step-num">01</span><div><strong>Shaxsiy ma'lumotlar</strong><p>Ism, familiya, sinf va aloqa.</p></div></li>
+        <li><span class="step-num">02</span><div><strong>Ota-ona ma'lumotlari</strong><p>Ism va telefon raqami.</p></div></li>
+        <li><span class="step-num">03</span><div><strong>Bo'lim tanlash</strong><p>O'qimoqchi bo'lgan bo'lim.</p></div></li>
+        <li><span class="step-num">04</span><div><strong>Daraja testi</strong><p>Natijaga ko'ra guruhing aniqlanadi.</p></div></li>
+      </ol>
+    </aside>
+
+    <div class="reg-form-wrap" data-reveal>
+      <form id="regForm" class="reg-form" novalidate autocomplete="on">
+        <h3 class="form-title">Ro'yxatdan o'tish</h3>
+        <p class="form-sub">Yulduzcha (*) bilan belgilangan maydonlar majburiy.</p>
+
+        <fieldset class="form-section">
+          <legend>O'quvchi ma'lumotlari</legend>
+          <div class="form-row">
+            <div class="field">
+              <label for="fname">Ism *</label>
+              <input id="fname" name="fname" type="text" required autocomplete="given-name" placeholder="Sardor" maxlength="50">
+              <small class="err" data-err-for="fname"></small>
+            </div>
+            <div class="field">
+              <label for="lname">Familiya *</label>
+              <input id="lname" name="lname" type="text" required autocomplete="family-name" placeholder="Toshmatov" maxlength="50">
+              <small class="err" data-err-for="lname"></small>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="field">
+              <label for="sinf">Sinf *</label>
+              <select id="sinf" name="sinf" required>
+                <option value="">Tanlang</option>
+                <option>1-sinf</option><option>2-sinf</option><option>3-sinf</option><option>4-sinf</option>
+                <option>5-sinf</option><option>6-sinf</option><option>7-sinf</option><option>8-sinf</option>
+                <option>9-sinf</option><option>10-sinf</option><option>11-sinf</option>
+              </select>
+              <small class="err" data-err-for="sinf"></small>
+            </div>
+            <div class="field">
+              <label for="tel">Telefon raqami *</label>
+              <input id="tel" name="tel" type="tel" required autocomplete="tel" placeholder="+998 90 000 00 00" maxlength="20">
+              <small class="err" data-err-for="tel"></small>
+            </div>
+          </div>
+          <div class="field">
+            <label for="manzil">Manzil (yashash joyi) *</label>
+            <input id="manzil" name="manzil" type="text" required placeholder="Toshkent shahar, Chilonzor tumani" maxlength="120">
+            <small class="err" data-err-for="manzil"></small>
+          </div>
+          <div class="field">
+            <label for="qiziqish">Qiziqishlari</label>
+            <textarea id="qiziqish" name="qiziqish" rows="2" placeholder="Matematika, dasturlash, musiqa..." maxlength="300"></textarea>
+          </div>
+        </fieldset>
+
+        <fieldset class="form-section">
+          <legend>Ota-ona ma'lumotlari</legend>
+          <div class="form-row">
+            <div class="field">
+              <label for="pname">Ota/Ona ismi *</label>
+              <input id="pname" name="pname" type="text" required placeholder="Alisher Toshmatov" maxlength="80">
+              <small class="err" data-err-for="pname"></small>
+            </div>
+            <div class="field">
+              <label for="ptel">Telefon raqami *</label>
+              <input id="ptel" name="ptel" type="tel" required placeholder="+998 90 000 00 00" maxlength="20">
+              <small class="err" data-err-for="ptel"></small>
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset class="form-section">
+          <legend>Bo'lim tanlash *</legend>
+          <div class="division-select" role="radiogroup" aria-label="Bo'lim tanlash">
+            <label class="div-opt">
+              <input type="radio" name="division" value="1" required>
+              <span class="div-opt-name">Bo'lim 1</span><span class="div-opt-sinf">1–4 sinf</span>
+            </label>
+            <label class="div-opt">
+              <input type="radio" name="division" value="2">
+              <span class="div-opt-name">Bo'lim 2</span><span class="div-opt-sinf">5–8 sinf</span>
+            </label>
+            <label class="div-opt">
+              <input type="radio" name="division" value="3">
+              <span class="div-opt-name">Bo'lim 3</span><span class="div-opt-sinf">9–11 sinf</span>
+            </label>
+          </div>
+          <small class="err" data-err-for="division"></small>
+        </fieldset>
+
+        <!-- Anti-bot honeypot (security.js to'ldiradi/tekshiradi); ko'rinmas -->
+        <div class="hp-field" aria-hidden="true">
+          <label for="company">Kompaniya</label>
+          <input id="company" name="company" type="text" tabindex="-1" autocomplete="off">
+        </div>
+
+        <p class="form-consent">Yuborish orqali siz ma'lumotlaringiz bog'lanish maqsadida saqlanishiga rozilik bildirasiz.</p>
+        <button type="submit" class="btn btn-primary btn-block form-submit">Ro'yxatdan o'tish <span aria-hidden="true">→</span></button>
+        <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= FAQ ============================= -->
+<section id="faq" class="section section-alt">
+  <div class="container narrow">
+    <div class="section-head" data-reveal>
+      <p class="eyebrow">Savollar</p>
+      <h2 class="section-title">Ko'p so'raladigan <strong>savollar</strong></h2>
+    </div>
+    <div class="faq-list">
+      <details class="faq-item" data-reveal>
+        <summary>FORWARD kimlar uchun?</summary>
+        <div class="faq-body"><p>1–11 sinf o'quvchilari uchun. Har bir yosh va daraja uchun alohida bo'lim va guruh mavjud.</p></div>
+      </details>
+      <details class="faq-item" data-reveal>
+        <summary>Daraja testi nima va qanday ishlaydi?</summary>
+        <div class="faq-body"><p>Bu — matematika va ingliz tilidan qisqa kirish testi. Natijaga ko'ra (55–100%) siz Nexus, Dominion yoki Imperial guruhiga joylashtirilasiz.</p></div>
+      </details>
+      <details class="faq-item" data-reveal>
+        <summary>Boshlash bepulmi?</summary>
+        <div class="faq-body"><p>Ha. Nexus tarifi bepul. Kerak bo'lganda Dominion yoki Imperialga o'tishingiz mumkin.</p></div>
+      </details>
+      <details class="faq-item" data-reveal>
+        <summary>Qaysi fanlar bor?</summary>
+        <div class="faq-body"><p>Hozircha asosiy yo'nalish — matematika va ingliz tili. Kelgusida fanlar kengaytiriladi.</p></div>
+      </details>
+      <details class="faq-item" data-reveal>
+        <summary>Internet zaif bo'lsa-chi?</summary>
+        <div class="faq-body"><p>Platforma mobil-birinchi va offline rejimni qo'llab-quvvatlaydi — sekin internetda ham ishlaydi.</p></div>
+      </details>
+      <details class="faq-item" data-reveal>
+        <summary>Ma'lumotlarim xavfsizmi?</summary>
+        <div class="faq-body"><p>Ha. Sayt zamonaviy xavfsizlik amaliyotlari (HTTPS, CSP, ma'lumotni minimallashtirish) asosida qurilgan. Batafsil: SECURITY hujjati.</p></div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= CONTACT ============================= -->
+<section id="contact" class="section">
+  <div class="container contact-grid">
+    <div class="contact-info" data-reveal>
+      <p class="eyebrow">Aloqa</p>
+      <h2 class="section-title">Savollaringiz <strong>bormi?</strong></h2>
+      <p class="lead">Biz bilan bog'laning — yordam berishdan mamnunmiz.</p>
+      <ul class="contact-list" role="list">
+        <li><span class="c-label">Telefon</span><a data-contact="phone" href="#">+998 …</a></li>
+        <li><span class="c-label">Telegram</span><a data-contact="telegram" href="#">@forward_uz</a></li>
+        <li><span class="c-label">Email</span><a data-contact="email" href="#">info@forward.uz</a></li>
+        <li><span class="c-label">Manzil</span><span data-contact="address">Toshkent, O'zbekiston</span></li>
+      </ul>
+    </div>
+    <a class="contact-cta" data-contact="telegram-cta" href="#" data-reveal>
+      <span class="cta-ico" aria-hidden="true">✈</span>
+      <strong>Telegram orqali yozing</strong>
+      <span>Eng tez javob — Telegram kanalimizda</span>
+    </a>
+  </div>
+</section>
+
+</main>
+
+<!-- ============================= FOOTER ============================= -->
+<footer class="footer">
+  <div class="container footer-inner">
+    <div class="footer-brand">
+      <a class="brand" href="#hero" aria-label="FORWARD">
+        <img class="brand-mark" src="assets/logos/forward-mark.svg" alt="" width="30" height="30" aria-hidden="true">
+        <span class="brand-word">FOR<span>WARD</span></span>
+      </a>
+      <p class="footer-tag">Bilimning Imperiyasi — o'zbek tilidagi premium ta'lim platformasi.</p>
+    </div>
+    <nav class="footer-cols" aria-label="Pastki menyu">
+      <div class="footer-col">
+        <h4>Platforma</h4>
+        <a href="#divisions">Bo'limlar</a>
+        <a href="#tiers">Darajalar</a>
+        <a href="daraja-test.html">Daraja testi</a>
+        <a href="#pricing">Narxlar</a>
+      </div>
+      <div class="footer-col">
+        <h4>Kompaniya</h4>
+        <a href="#why">Biz haqimizda</a>
+        <a href="#faq">Savollar</a>
+        <a href="#contact">Aloqa</a>
+        <a href="/SECURITY.md">Xavfsizlik</a>
+      </div>
+      <div class="footer-col">
+        <h4>Ijtimoiy</h4>
+        <a data-contact="telegram" href="#">Telegram</a>
+        <a data-contact="instagram" href="#">Instagram</a>
+      </div>
+    </nav>
+  </div>
+  <div class="footer-bottom container">
+    <p class="footer-copy">© <span data-year>2026</span> FORWARD Education Platform. Barcha huquqlar himoyalangan.</p>
+    <p class="footer-pay" data-pay>Payme · Click · Uzum Bank</p>
+  </div>
+</footer>
+
+<button class="to-top" id="toTop" aria-label="Yuqoriga" hidden><span aria-hidden="true">↑</span></button>
+
+<!-- ===== Scripts (CSP: 'self' — inline script yo'q) ===== -->
+<script src="js/config.js"></script>
+<script src="js/security.js"></script>
+<script src="js/main.js" defer></script>
+<script src="js/sw-register.js" defer></script>
+</body>
+</html>

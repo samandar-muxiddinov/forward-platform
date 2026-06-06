@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="uz" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0a0f1e">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Oflayn — FORWARD</title>
+  <style>
+    /* ── Design tokens (inline for offline resilience) ── */
+    :root {
+      --navy:       #0a0f1e;
+      --navy-mid:   #111827;
+      --navy-light: #1a2540;
+      --gold:       #c9a84c;
+      --gold-light: #e0c97a;
+      --white:      #f5f0e8;
+      --muted:      #8a96aa;
+      --radius:     12px;
+      --font:       system-ui, -apple-system, 'Segoe UI', sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      height: 100%;
+      background-color: var(--navy);
+      color: var(--white);
+      font-family: var(--font);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100dvh;
+      padding: 2rem 1.25rem;
+      text-align: center;
+    }
+
+    /* ── Decorative border ring ── */
+    .card {
+      background: var(--navy-mid);
+      border: 1px solid rgba(201, 168, 76, 0.25);
+      border-radius: var(--radius);
+      padding: 3rem 2.5rem;
+      max-width: 480px;
+      width: 100%;
+      box-shadow: 0 0 60px rgba(201, 168, 76, 0.06);
+    }
+
+    /* ── Gold crown / shield icon (inline SVG — no network needed) ── */
+    .icon {
+      display: block;
+      margin: 0 auto 1.75rem;
+      width: 64px;
+      height: 64px;
+    }
+
+    /* ── Wordmark ── */
+    .brand {
+      font-size: 1.75rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 0.25rem;
+    }
+
+    .tagline {
+      font-size: 0.75rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 2rem;
+    }
+
+    /* ── Divider ── */
+    .divider {
+      width: 48px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin: 0 auto 2rem;
+    }
+
+    h1 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 0.75rem;
+    }
+
+    p {
+      font-size: 0.925rem;
+      line-height: 1.65;
+      color: var(--muted);
+      margin-bottom: 2rem;
+    }
+
+    /* ── CTA button ── */
+    .btn {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--navy);
+      font-size: 0.875rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 0.75rem 2rem;
+      border-radius: calc(var(--radius) / 2);
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .btn:hover, .btn:focus-visible {
+      background: var(--gold-light);
+      transform: translateY(-1px);
+      outline: none;
+    }
+
+    .btn:active { transform: translateY(0); }
+
+    /* ── Status indicator ── */
+    .status {
+      margin-top: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #e05a5a;
+      flex-shrink: 0;
+    }
+
+    /* ── Footer ── */
+    footer {
+      margin-top: 2.5rem;
+      font-size: 0.75rem;
+      color: rgba(138, 150, 170, 0.5);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+
+    <!-- Inline shield SVG — zero network dependency -->
+    <svg class="icon" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg"
+         aria-hidden="true" focusable="false">
+      <path d="M32 4L8 14v18c0 13.25 10.28 25.63 24 29 13.72-3.37 24-15.75 24-29V14L32 4Z"
+            fill="#0a0f1e" stroke="#c9a84c" stroke-width="2"/>
+      <path d="M32 12L14 20v12c0 8.84 6.86 17.1 18 19.94C43.14 49.1 50 40.84 50 32V20L32 12Z"
+            fill="#111827"/>
+      <path d="M24 32l6 6 10-10" stroke="#c9a84c" stroke-width="2.5"
+            stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+
+    <div class="brand">FORWARD</div>
+    <div class="tagline">Bilimning Imperiyasi</div>
+
+    <div class="divider"></div>
+
+    <h1>Hozir oflayn rejimdasiz</h1>
+    <p>
+      Internet aloqasi topilmadi. Oldin yuklangan sahifalar hali ham mavjud.
+      Aloqa tiklangandan so'ng platforma to'liq ishlaydi.
+    </p>
+
+    <a href="/" class="btn">Bosh sahifaga qaytish</a>
+
+    <div class="status">
+      <span class="dot" aria-hidden="true"></span>
+      <span>Internet ulanishi yo'q</span>
+    </div>
+
+  </div>
+
+  <footer>
+    &copy; 2026 FORWARD Ta'lim Platformasi
+  </footer>
+
+</body>
+</html>

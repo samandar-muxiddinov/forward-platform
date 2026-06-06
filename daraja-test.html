@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="uz" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+        content="FORWARD platformasida o'z darajangizni aniqlang — Nexus, Dominion yoki Imperial. Matematika va Ingliz tili bo'yicha qisqa test." />
+  <meta name="robots" content="noindex, nofollow" />
+
+  <!-- Security: meta-CSP (host headers in _headers/.htaccess/etc. also apply) -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; form-action 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; manifest-src 'self'; worker-src 'self'; upgrade-insecure-requests" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta name="theme-color" content="#0a0f1e" />
+
+  <title>Daraja aniqlash testi — FORWARD</title>
+
+  <!-- ── Open Graph ── -->
+  <meta property="og:title"       content="Daraja aniqlash testi — FORWARD" />
+  <meta property="og:description" content="O'z darajangizni aniqlang: Nexus, Dominion yoki Imperial." />
+  <meta property="og:type"        content="website" />
+
+  <!-- ── Favicon ── -->
+  <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg" />
+  <link rel="manifest" href="/manifest.webmanifest" />
+  <link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.png" />
+
+  <!-- ── Google Fonts ── -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- ── Design tokens ── -->
+  <link rel="stylesheet" href="css/tokens.css" />
+
+  <!-- ── Test styles ── -->
+  <link rel="stylesheet" href="css/test.css" />
+</head>
+
+<body>
+
+  <!-- ════════════════════════════════════════════════
+       NAVIGATION
+  ════════════════════════════════════════════════ -->
+  <nav class="site-nav" role="navigation" aria-label="Asosiy navigatsiya">
+    <div class="nav-inner">
+
+      <!-- Brand -->
+      <a href="index.html" class="nav-brand" aria-label="FORWARD — Bosh sahifa">
+        FORWARD
+      </a>
+
+      <!-- Page eyebrow -->
+      <span class="nav-eyebrow" aria-hidden="true">Daraja testi</span>
+
+      <!-- Back link -->
+      <a href="index.html" class="nav-back" aria-label="Bosh sahifaga qaytish">
+        <svg aria-hidden="true" focusable="false" viewBox="0 0 16 16" fill="none"
+             xmlns="http://www.w3.org/2000/svg">
+          <path d="M10 3L5 8L10 13" stroke="currentColor" stroke-width="1.5"
+                stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Bosh sahifa
+      </a>
+
+    </div>
+  </nav>
+
+
+  <!-- ════════════════════════════════════════════════
+       MAIN CONTENT
+  ════════════════════════════════════════════════ -->
+  <main class="test-main" id="main-content">
+    <div class="test-container">
+
+      <!-- ── ARIA live regions ─────────────────────── -->
+      <div
+        id="quiz-live"
+        role="status"
+        aria-live="polite"
+        aria-atomic="true"
+        class="sr-only"
+        style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;">
+      </div>
+      <div
+        id="result-live"
+        role="alert"
+        aria-live="assertive"
+        aria-atomic="true"
+        class="sr-only"
+        style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;">
+      </div>
+
+
+      <!-- ══════════════════════════════════════════
+           SCREEN 1 — INTRO
+      ══════════════════════════════════════════ -->
+      <section
+        id="screen-intro"
+        class="test-screen"
+        aria-label="Test kirish sahifasi"
+        tabindex="-1">
+
+        <!-- Eyebrow -->
+        <p class="intro-eyebrow" aria-hidden="true">Daraja aniqlash testi</p>
+
+        <!-- Heading -->
+        <h1 class="intro-title">
+          O'z <em>darajangizni</em><br />aniqlang
+        </h1>
+
+        <!-- Description -->
+        <p class="intro-desc">
+          10 ta savol — Matematika va Ingliz tili bo'yicha — va siz
+          <strong>Nexus</strong>, <strong>Dominion</strong> yoki
+          <strong>Imperial</strong> darajasini bilasiz. Test 5–7 daqiqa
+          davom etadi.
+        </p>
+
+        <!-- Subject badges -->
+        <div class="intro-subjects" aria-label="Test fanlari">
+          <span class="subject-badge">
+            <span class="badge-icon" aria-hidden="true">∑</span>
+            Matematika
+          </span>
+          <span class="subject-badge">
+            <span class="badge-icon" aria-hidden="true">🇬🇧</span>
+            Ingliz tili
+          </span>
+        </div>
+
+        <!-- Divider -->
+        <div class="ornament-divider" aria-hidden="true">sinf tanlang</div>
+
+        <!-- Grade group selector -->
+        <div class="grade-section">
+          <span id="grade-label" class="grade-label">O'qish sinfingiz</span>
+          <div
+            class="grade-buttons"
+            role="group"
+            aria-labelledby="grade-label">
+
+            <button
+              class="grade-btn"
+              type="button"
+              data-group="1-4"
+              aria-pressed="false"
+              aria-label="1–4 sinf">
+              <span class="grade-num">1–4</span>
+              <span class="grade-sub">sinf</span>
+            </button>
+
+            <button
+              class="grade-btn"
+              type="button"
+              data-group="5-8"
+              aria-pressed="false"
+              aria-label="5–8 sinf">
+              <span class="grade-num">5–8</span>
+              <span class="grade-sub">sinf</span>
+            </button>
+
+            <button
+              class="grade-btn"
+              type="button"
+              data-group="9-11"
+              aria-pressed="false"
+              aria-label="9–11 sinf">
+              <span class="grade-num">9–11</span>
+              <span class="grade-sub">sinf</span>
+            </button>
+
+          </div>
+        </div>
+
+        <!-- Tier preview -->
+        <div class="tier-preview" role="presentation" aria-hidden="true">
+          <div class="tier-chip chip-nexus">Nexus<br/>55–70%</div>
+          <div class="tier-chip chip-dominion">Dominion<br/>71–85%</div>
+          <div class="tier-chip chip-imperial">Imperial<br/>86–100%</div>
+        </div>
+
+        <!-- Start button -->
+        <button
+          id="btn-start"
+          type="button"
+          class="btn-start"
+          disabled
+          aria-describedby="grade-label">
+          Testni boshlash
+          <span class="btn-arrow" aria-hidden="true">→</span>
+        </button>
+
+      </section>
+
+
+      <!-- ══════════════════════════════════════════
+           SCREEN 2 — QUIZ
+      ══════════════════════════════════════════ -->
+      <section
+        id="screen-quiz"
+        class="test-screen"
+        aria-label="Test savollari"
+        aria-live="off"
+        tabindex="-1">
+
+        <!-- Quiz header: progress -->
+        <header class="quiz-header">
+          <div class="quiz-meta">
+            <span
+              id="quiz-counter"
+              class="quiz-counter"
+              aria-label="Savol raqami">
+              Savol 1 / 10
+            </span>
+            <span
+              id="quiz-subject-tag"
+              class="quiz-subject-tag tag-math">
+              Matematika
+            </span>
+          </div>
+
+          <!-- Progress bar -->
+          <div
+            class="progress-track"
+            role="progressbar"
+            aria-valuemin="0"
+            aria-valuemax="100"
+            aria-valuenow="0"
+            aria-label="Test borishi">
+            <div
+              id="progress-fill"
+              class="progress-fill"
+              style="width: 0%;">
+            </div>
+          </div>
+        </header>
+
+        <!-- Question card -->
+        <article class="question-card">
+          <p
+            id="question-text"
+            class="question-text"
+            aria-live="polite">
+          </p>
+
+          <!-- Options -->
+          <ul
+            id="options-list"
+            class="options-list"
+            role="list"
+            aria-label="Javob variantlari">
+            <!-- Options injected by JS -->
+          </ul>
+        </article>
+
+        <!-- Next button -->
+        <button
+          id="btn-next"
+          type="button"
+          class="btn-next"
+          aria-hidden="true">
+          Keyingi savol
+          <span class="btn-arrow" aria-hidden="true">→</span>
+        </button>
+
+      </section>
+
+
+      <!-- ══════════════════════════════════════════
+           SCREEN 3 — RESULT
+      ══════════════════════════════════════════ -->
+      <section
+        id="screen-result"
+        class="test-screen result-screen"
+        aria-label="Test natijasi"
+        aria-live="polite"
+        tabindex="-1">
+
+        <!-- Heraldic crest -->
+        <div class="result-crest" aria-hidden="true">
+          <img
+            id="result-crest-img"
+            class="result-crest-img"
+            alt=""
+            width="140"
+            height="140"
+            loading="eager"
+          />
+        </div>
+
+        <!-- Tier badge -->
+        <div
+          class="result-tier-badge"
+          role="text"
+          aria-label="Daraja">
+          <span id="tier-dot" class="tier-dot" aria-hidden="true"></span>
+          <span id="tier-badge-text"></span>
+        </div>
+
+        <!-- Score ring -->
+        <div
+          class="score-ring-wrap"
+          role="img"
+          aria-labelledby="score-number">
+
+          <svg
+            class="score-ring-svg"
+            viewBox="0 0 120 120"
+            aria-hidden="true">
+            <circle
+              class="score-ring-bg"
+              cx="60" cy="60" r="50">
+            </circle>
+            <circle
+              id="score-ring-fill"
+              class="score-ring-fill"
+              cx="60" cy="60" r="50"
+              style="stroke-dasharray: 314.16; stroke-dashoffset: 314.16;">
+            </circle>
+          </svg>
+
+          <div class="score-ring-label">
+            <span
+              id="score-number"
+              class="score-number"
+              aria-label="Ball foizda">
+              0
+            </span>
+            <span class="score-pct-sign" aria-hidden="true">%</span>
+          </div>
+
+        </div>
+
+        <!-- Tier title -->
+        <h2 id="result-title" class="result-title"></h2>
+
+        <!-- Message -->
+        <p id="result-message" class="result-message"></p>
+
+        <!-- Next step card -->
+        <div class="result-next-step" role="region" aria-label="Keyingi qadam">
+          <span id="step-icon" class="step-icon" aria-hidden="true"></span>
+          <div class="step-text">
+            <strong id="step-title"></strong>
+            <span id="step-text"></span>
+          </div>
+        </div>
+
+        <!-- Action buttons -->
+        <div class="result-actions">
+          <a
+            id="btn-register"
+            href="index.html#register"
+            class="btn-register"
+            role="button">
+            Ro'yxatdan o'tish
+            <span aria-hidden="true">→</span>
+          </a>
+
+          <button
+            id="btn-retry"
+            type="button"
+            class="btn-retry">
+            <span aria-hidden="true">↺</span>
+            Qayta urinish
+          </button>
+        </div>
+
+      </section>
+
+    </div><!-- /.test-container -->
+  </main>
+
+
+  <!-- ════════════════════════════════════════════════
+       SCRIPTS
+       Load order: config → security → test
+  ════════════════════════════════════════════════ -->
+  <script src="js/config.js"></script>
+  <script src="js/security.js"></script>
+  <script src="js/test.js"></script>
+  <script src="js/sw-register.js" defer></script>
+
+</body>
+</html>

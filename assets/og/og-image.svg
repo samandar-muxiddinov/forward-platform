@@ -1,0 +1,108 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <!-- Background gradient: deep navy -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%"   stop-color="#0a0f1e"/>
+      <stop offset="100%" stop-color="#111827"/>
+    </linearGradient>
+
+    <!-- Gold shimmer gradient for the wordmark -->
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%"   stop-color="#e0c97a"/>
+      <stop offset="50%"  stop-color="#c9a84c"/>
+      <stop offset="100%" stop-color="#a07830"/>
+    </linearGradient>
+
+    <!-- Radial gold glow behind the shield -->
+    <radialGradient id="glowGrad" cx="50%" cy="48%" r="38%">
+      <stop offset="0%"   stop-color="#c9a84c" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#c9a84c" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Subtle vignette -->
+    <radialGradient id="vigGrad" cx="50%" cy="50%" r="70%">
+      <stop offset="0%"   stop-color="transparent"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.45"/>
+    </radialGradient>
+
+    <!-- Clip path to keep decorative lines inside canvas -->
+    <clipPath id="canvas">
+      <rect width="1200" height="630"/>
+    </clipPath>
+  </defs>
+
+  <!-- ── Background ── -->
+  <rect width="1200" height="630" fill="url(#bgGrad)"/>
+  <rect width="1200" height="630" fill="url(#vigGrad)"/>
+
+  <!-- ── Decorative grid lines (very subtle) ── -->
+  <g clip-path="url(#canvas)" opacity="0.06" stroke="#c9a84c" stroke-width="1">
+    <!-- Vertical lines -->
+    <line x1="200" y1="0" x2="200" y2="630"/>
+    <line x1="400" y1="0" x2="400" y2="630"/>
+    <line x1="800" y1="0" x2="800" y2="630"/>
+    <line x1="1000" y1="0" x2="1000" y2="630"/>
+    <!-- Horizontal lines -->
+    <line x1="0" y1="157" x2="1200" y2="157"/>
+    <line x1="0" y1="473" x2="1200" y2="473"/>
+  </g>
+
+  <!-- ── Corner accent marks ── -->
+  <g stroke="#c9a84c" stroke-width="2" fill="none" opacity="0.5">
+    <!-- Top-left -->
+    <polyline points="48,68 48,48 68,48"/>
+    <!-- Top-right -->
+    <polyline points="1132,48 1152,48 1152,68"/>
+    <!-- Bottom-left -->
+    <polyline points="48,562 48,582 68,582"/>
+    <!-- Bottom-right -->
+    <polyline points="1152,562 1152,582 1132,582"/>
+  </g>
+
+  <!-- ── Gold glow halo behind shield ── -->
+  <ellipse cx="600" cy="290" rx="220" ry="210" fill="url(#glowGrad)"/>
+
+  <!-- ── Shield icon (centered, large) ── -->
+  <g transform="translate(518, 108) scale(1.37)">
+    <!-- Shield outer body -->
+    <path d="M60 4L8 24v34c0 22.5 19.2 43.5 52 50 32.8-6.5 52-27.5 52-50V24L60 4Z"
+          fill="#0a0f1e" stroke="#c9a84c" stroke-width="3.5"/>
+    <!-- Shield inner fill -->
+    <path d="M60 14L18 30v28c0 18 14.4 34.6 42 40 27.6-5.4 42-22 42-40V30L60 14Z"
+          fill="#111827"/>
+    <!-- Checkmark / forward mark -->
+    <path d="M44 56l14 14 20-24"
+          stroke="#c9a84c" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"
+          fill="none"/>
+  </g>
+
+  <!-- ── Horizontal gold rule above wordmark ── -->
+  <line x1="420" y1="358" x2="780" y2="358" stroke="#c9a84c" stroke-width="1.5" opacity="0.7"/>
+
+  <!-- ── Wordmark: FORWARD ── -->
+  <text x="600" y="440"
+        font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif"
+        font-size="96" font-weight="900"
+        letter-spacing="22"
+        text-anchor="middle"
+        fill="url(#goldGrad)">FORWARD</text>
+
+  <!-- ── Horizontal gold rule below wordmark ── -->
+  <line x1="420" y1="460" x2="780" y2="460" stroke="#c9a84c" stroke-width="1.5" opacity="0.7"/>
+
+  <!-- ── Tagline ── -->
+  <text x="600" y="512"
+        font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif"
+        font-size="26" font-weight="400"
+        letter-spacing="10"
+        text-anchor="middle"
+        fill="#8a96aa">BILIMNING IMPERIYASI</text>
+
+  <!-- ── Domain badge (bottom-right) ── -->
+  <text x="1140" y="602"
+        font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif"
+        font-size="20" font-weight="400"
+        letter-spacing="3"
+        text-anchor="end"
+        fill="#c9a84c" opacity="0.6">forward.uz</text>
+</svg>

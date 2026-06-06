@@ -1,0 +1,122 @@
+/* =====================================================================
+   FORWARD — Design System / Tokens
+   Single source of truth for color, type, spacing, motion.
+   Built on the original navy + gold ("Black & Gold") luxury identity.
+   ===================================================================== */
+
+:root {
+  /* ---- Core brand surfaces ---- */
+  --navy:        #0a0f1e;   /* primary background */
+  --navy-900:    #070b16;   /* deepest */
+  --deep:        #0d1529;   /* raised background */
+  --surface:     #111a30;   /* cards */
+  --surface-2:   #16203a;   /* elevated cards */
+  --glass:       rgba(255,255,255,0.03);
+  --glass-2:     rgba(255,255,255,0.05);
+
+  /* ---- Gold (signature) ---- */
+  --gold:        #c9a84c;
+  --gold-light:  #e8c96a;
+  --gold-deep:   #a8862f;
+  --gold-dim:    rgba(201,168,76,0.15);
+  --gold-glow:   rgba(201,168,76,0.30);
+
+  /* ---- Neutrals / text ---- */
+  --white:       #f4f1eb;
+  --cream:       #ede8dc;
+  --silver:      #a8b2c8;
+  --silver-dim:  #6f7995;
+  --ink:         #4a5268;
+
+  /* ---- Tier accents (rank system) ---- */
+  --tier1:       #4e9eff;   /* NEXUS  — blue  */
+  --tier1-deep:  #2d6fd0;
+  --tier2:       #7c5cbf;   /* DOMINION — violet */
+  --tier2-deep:  #5a3f9a;
+  --tier3:       #c9a84c;   /* IMPERIAL — gold */
+  --tier3-deep:  #a8862f;
+
+  /* ---- Division accents ---- */
+  --div1-a: #4e9eff; --div1-b: #7c5cbf;
+  --div2-a: #7c5cbf; --div2-b: #c9a84c;
+  --div3-a: #c9a84c; --div3-b: #e8826a;
+
+  /* ---- Semantic ---- */
+  --success: #36c08a;
+  --warning: #e0a23a;
+  --danger:  #e0564a;
+  --info:    #4e9eff;
+
+  /* ---- Lines / borders ---- */
+  --border:        rgba(201,168,76,0.20);
+  --border-soft:   rgba(255,255,255,0.08);
+  --border-strong: rgba(201,168,76,0.45);
+
+  /* ---- Typography ---- */
+  --font-display: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  --font-body:    'DM Sans', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-mono:    'Space Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+  /* Fluid type scale (clamp: min, fluid, max) */
+  --fs-hero:   clamp(3.2rem, 8vw, 7rem);
+  --fs-h1:     clamp(2.4rem, 5vw, 4rem);
+  --fs-h2:     clamp(2rem, 4vw, 3.4rem);
+  --fs-h3:     clamp(1.5rem, 2.6vw, 2rem);
+  --fs-lead:   clamp(1.05rem, 1.6vw, 1.25rem);
+  --fs-body:   1rem;
+  --fs-sm:     0.875rem;
+  --fs-xs:     0.78rem;
+  --fs-2xs:    0.7rem;
+
+  --lh-tight:  1.05;
+  --lh-snug:   1.25;
+  --lh-normal: 1.6;
+  --ls-wide:   0.08em;
+  --ls-wider:  0.15em;
+  --ls-widest: 0.22em;
+
+  /* ---- Spacing scale (8pt-ish) ---- */
+  --sp-1: 0.25rem; --sp-2: 0.5rem;  --sp-3: 0.75rem; --sp-4: 1rem;
+  --sp-5: 1.5rem;  --sp-6: 2rem;    --sp-7: 2.5rem;  --sp-8: 3rem;
+  --sp-9: 4rem;    --sp-10: 5rem;   --sp-11: 6rem;   --sp-12: 8rem;
+
+  /* ---- Radius ---- */
+  --r-xs: 4px; --r-sm: 8px; --r-md: 12px; --r-lg: 18px; --r-xl: 28px; --r-pill: 999px;
+
+  /* ---- Shadow & glow ---- */
+  --shadow-sm:  0 2px 8px rgba(0,0,0,0.25);
+  --shadow-md:  0 10px 30px rgba(0,0,0,0.35);
+  --shadow-lg:  0 24px 60px rgba(0,0,0,0.45);
+  --glow-gold:  0 10px 40px rgba(201,168,76,0.28);
+  --glow-tier1: 0 10px 40px rgba(78,158,255,0.25);
+  --glow-tier2: 0 10px 40px rgba(124,92,191,0.25);
+
+  /* ---- Layout ---- */
+  --container:    1200px;
+  --container-wide: 1320px;
+  --nav-h: 72px;
+
+  /* ---- Motion ---- */
+  --ease:       cubic-bezier(0.22, 0.61, 0.36, 1);
+  --ease-out:   cubic-bezier(0.16, 1, 0.3, 1);
+  --t-fast:     0.18s;
+  --t-base:     0.3s;
+  --t-slow:     0.6s;
+
+  /* ---- Z-index layers ---- */
+  --z-base: 1;
+  --z-nav: 100;
+  --z-overlay: 500;
+  --z-modal: 900;
+  --z-noise: 9999;
+}
+
+/* Honour user motion preferences globally */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

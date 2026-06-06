@@ -1,0 +1,29 @@
+# =====================================================================
+# FORWARD Platform — Netlify _headers
+# Applies security headers to every response served by Netlify.
+# =====================================================================
+#
+# CSP NOTE — form endpoint:
+#   If js/config.js form.endpoint is set to an external URL (e.g.
+#   Formspree, a Telegram proxy), append that domain to BOTH
+#   connect-src AND form-action here.  Example:
+#     connect-src 'self' https://formspree.io
+#     form-action  'self' https://formspree.io
+#
+# CSP NOTE — unsafe-inline for styles:
+#   'unsafe-inline' is permitted in style-src as a pragmatic compromise
+#   to support component-scoped styles without a build step.  It does
+#   NOT weaken script-src.  Removing it is a future hardening item:
+#   replace inline styles with external CSS classes and drop 'unsafe-inline'.
+# =====================================================================
+
+/*
+  Content-Security-Policy: default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; manifest-src 'self'; worker-src 'self'; upgrade-insecure-requests
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), interest-cohort=(), payment=()
+  Cross-Origin-Opener-Policy: same-origin
+  Cross-Origin-Resource-Policy: same-origin
+  X-Permitted-Cross-Domain-Policies: none

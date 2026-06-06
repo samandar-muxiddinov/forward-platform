@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 152" fill="none" role="img" aria-labelledby="nexusTitle nexusDesc">
+  <title id="nexusTitle">Nexus darajasi gerbi</title>
+  <desc id="nexusDesc">Heraldik qalqon ichida bog'langan tugunlar panjarasi yuqoriga ko'tariladi, eng tepada kichik kalit-tosh va bitta yulduz — Nexus: poydevor, bog'lanish va birinchi uchqun. Ko'k urg'u.</desc>
+
+  <defs>
+    <!-- Faint inner tint so the crest reads on navy -->
+    <linearGradient id="nx-fill" x1="64" y1="30" x2="64" y2="142" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#4e9eff" stop-opacity="0.18"/>
+      <stop offset="0.55" stop-color="#4e9eff" stop-opacity="0.05"/>
+      <stop offset="1" stop-color="#0a0f1e" stop-opacity="0"/>
+    </linearGradient>
+    <!-- Shared gold linework gradient -->
+    <linearGradient id="nx-gold" x1="24" y1="20" x2="104" y2="142" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#e8c96a"/>
+      <stop offset="0.5" stop-color="#c9a84c"/>
+      <stop offset="1" stop-color="#a8862f"/>
+    </linearGradient>
+  </defs>
+
+  <!-- ===== SHARED SHIELD (identical path across all three tiers) ===== -->
+  <!-- Inner tint -->
+  <path d="M64 30 L108 38 V92 C108 118 88 134 64 142 C40 134 20 118 20 92 V38 Z" fill="url(#nx-fill)"/>
+  <!-- Outer heraldic line -->
+  <path d="M64 30 L108 38 V92 C108 118 88 134 64 142 C40 134 20 118 20 92 V38 Z"
+        stroke="url(#nx-gold)" stroke-width="3" stroke-linejoin="round"/>
+  <!-- Inner heraldic line (double border) -->
+  <path d="M64 36 L102 42.8 V91 C102 113.5 84.5 128 64 135.4 C43.5 128 26 113.5 26 91 V42.8 Z"
+        stroke="#c9a84c" stroke-width="1.6" stroke-linejoin="round" stroke-opacity="0.85"/>
+
+  <!-- ===== TIER ORNAMENT (Nexus — minimal: single small star) ===== -->
+  <path d="M64 5 L66.6 12.4 L74.4 12.5 L68.1 17.2 L70.4 24.6 L64 20.1 L57.6 24.6 L59.9 17.2 L53.6 12.5 L61.4 12.4 Z"
+        fill="#4e9eff" fill-opacity="0.28" stroke="url(#nx-gold)" stroke-width="2.4" stroke-linejoin="round"/>
+
+  <!-- ===== INNER EMBLEM (lattice of connected nodes rising to a keystone) ===== -->
+  <!-- Connecting paths first (drawn under the nodes) -->
+  <g stroke="#4e9eff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" stroke-opacity="0.95">
+    <path d="M64 117 L47 101 M64 117 L81 101"/>
+    <path d="M47 101 L64 84 M81 101 L64 84"/>
+    <path d="M47 101 H81"/>
+    <path d="M64 84 V72"/>
+  </g>
+  <!-- Keystone diamond at the apex of the path -->
+  <path d="M64 51 L72 61 L64 71 L56 61 Z" fill="#4e9eff" fill-opacity="0.24"
+        stroke="url(#nx-gold)" stroke-width="2.6" stroke-linejoin="round"/>
+  <!-- Nodes (gold rims, navy cores) -->
+  <g stroke="url(#nx-gold)" stroke-width="2.4">
+    <circle cx="64" cy="117" r="4.4" fill="#0a0f1e"/>
+    <circle cx="47" cy="101" r="4.4" fill="#0a0f1e"/>
+    <circle cx="81" cy="101" r="4.4" fill="#0a0f1e"/>
+    <circle cx="64" cy="84"  r="4.8" fill="#0d1529"/>
+  </g>
+  <!-- Tiny accent gleams -->
+  <g fill="#e8c96a">
+    <circle cx="64" cy="117" r="1.5"/>
+    <circle cx="47" cy="101" r="1.5"/>
+    <circle cx="81" cy="101" r="1.5"/>
+    <circle cx="64" cy="61"  r="1.6"/>
+  </g>
+</svg>

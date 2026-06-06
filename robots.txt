@@ -1,0 +1,15 @@
+# FORWARD Platform — robots.txt
+# TODO: Replace https://forward.uz with the production domain once DNS is live.
+
+User-agent: *
+Allow: /
+
+# Block internal/utility paths that carry no SEO value.
+Disallow: /offline.html
+Disallow: /js/
+Disallow: /css/
+Disallow: /assets/og/
+Disallow: /assets/icons/
+Disallow: /docs/
+
+Sitemap: https://forward.uz/sitemap.xml
