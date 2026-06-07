@@ -164,7 +164,7 @@
     var ctaP = $('.tiers-cta p');
     if (ctaP) {
       var name = String(data.tier).charAt(0).toUpperCase() + String(data.tier).slice(1);
-      setText(ctaP, 'Oxirgi natijangiz: ' + name + (data.percent != null ? ' (' + data.percent + '%)' : '') + '. Qayta urinib ko‘rasizmi?');
+      setText(ctaP, 'Oxirgi natijangiz: ' + name + (data.percent != null ? ' (' + data.percent + '%)' : '') + '. Qayta urinib ko\'rasizmi?');
     }
   }());
 
@@ -186,8 +186,8 @@
     function isPhone(v) { return typeof V.phoneUz === 'function' ? V.phoneUz(v) : /^\+?998\s?\d{2}\s?\d{3}\s?\d{2}\s?\d{2}$/.test(v.trim()); }
 
     var rules = {
-      fname:  { el: $('#fname'),  test: isName,  msg: 'Ismni to‘g‘ri kiriting.' },
-      lname:  { el: $('#lname'),  test: isName,  msg: 'Familiyani to‘g‘ri kiriting.' },
+      fname:  { el: $('#fname'),  test: isName,  msg: 'Ismni to\'g\'ri kiriting.' },
+      lname:  { el: $('#lname'),  test: isName,  msg: 'Familiyani to\'g\'ri kiriting.' },
       sinf:   { el: $('#sinf'),   test: function (v) { return v.trim() !== ''; }, msg: 'Sinfni tanlang.' },
       tel:    { el: $('#tel'),    test: isPhone, msg: 'Masalan: +998 90 000 00 00' },
       manzil: { el: $('#manzil'), test: function (v) { return v.trim().length >= 4; }, msg: 'Manzilni kiriting.' },
@@ -229,7 +229,7 @@
       }
       /* time-trap */
       if (SEC.form && SEC.form.timeTrap && typeof SEC.form.timeTrap.check === 'function') {
-        try { if (SEC.form.timeTrap.check()) { status('Iltimos, formani diqqat bilan to‘ldiring.', 'bad'); return; } } catch (e3) {}
+        try { if (SEC.form.timeTrap.check()) { status('Iltimos, formani diqqat bilan to\'ldiring.', 'bad'); return; } } catch (e3) {}
       }
       /* rate limit */
       if (SEC.form && typeof SEC.form.rateLimit === 'function') {
@@ -237,7 +237,7 @@
           var rl = SEC.form.rateLimit('reg_submit', 5, 600000);
           if (rl && rl.allowed === false) {
             var mins = Math.ceil((rl.retryInMs || 0) / 60000);
-            status('Juda ko‘p urinish. ' + mins + ' daqiqadan so‘ng qayta urining.', 'bad');
+            status('Juda ko\'p urinish. ' + mins + ' daqiqadan so\'ng qayta urining.', 'bad');
             return;
           }
         } catch (e4) {}
@@ -247,10 +247,10 @@
       var valid = true;
       Object.keys(rules).forEach(function (key) { if (!validateField(key)) valid = false; });
       var division = form.querySelector('input[name="division"]:checked');
-      if (!division) { showErr('division', 'Bo‘limni tanlang.'); valid = false; }
+      if (!division) { showErr('division', 'Bo\'limni tanlang.'); valid = false; }
       else { showErr('division', ''); }
 
-      if (!valid) { status('Iltimos, belgilangan maydonlarni to‘g‘rilang.', 'bad'); return; }
+      if (!valid) { status('Iltimos, belgilangan maydonlarni to\'g\'rilang.', 'bad'); return; }
 
       /* build sanitized payload */
       var payload = {
@@ -277,7 +277,7 @@
       var submitBtn = $('.form-submit', form);
       if (submitBtn) submitBtn.disabled = true;
 
-      /* Mahalliy zaxira — server o‘chiq/oflayn bo‘lsa ham lead yo‘qolmaydi */
+      /* Mahalliy zaxira — server o'chiq/oflayn bo'lsa ham lead yo'qolmaydi */
       function saveLocalBackup() {
         try {
           var key = 'forward_registrations';
@@ -290,7 +290,7 @@
           else localStorage.setItem(key, val);
         } catch (e6) {}
       }
-      /* O‘quvchi profilini eslab qolamiz — daraja testi natijasi shu arizaga bog‘lanadi */
+      /* O'quvchi profilini eslab qolamiz — daraja testi natijasi shu arizaga bog'lanadi */
       function saveStudentProfile() {
         try {
           var prof = JSON.stringify({
@@ -312,10 +312,10 @@
         if (r.ok) { succeed(); return; }
         if (r.status === 429) {
           if (submitBtn) submitBtn.disabled = false;
-          status('Juda ko‘p urinish. Iltimos, birozdan so‘ng qayta urining.', 'bad');
+          status('Juda ko\'p urinish. Iltimos, birozdan so\'ng qayta urining.', 'bad');
           return;
         }
-        /* Server xatosi — yo‘qotmaymiz: mahalliy zaxira + muvaffaqiyat */
+        /* Server xatosi — yo'qotmaymiz: mahalliy zaxira + muvaffaqiyat */
         saveLocalBackup(); succeed();
       }).catch(function () {
         /* Tarmoq xatosi / oflayn — mahalliy zaxira + muvaffaqiyat */
@@ -335,12 +335,12 @@
       panel.appendChild(check);
 
       var h = document.createElement('h3');
-      h.textContent = 'Muvaffaqiyatli ro‘yxatdan o‘tdingiz!';
+      h.textContent = 'Muvaffaqiyatli ro\'yxatdan o\'tdingiz!';
       panel.appendChild(h);
 
       var p = document.createElement('p');
       var nm = payload && payload.student ? payload.student.firstName : '';
-      p.textContent = (nm ? nm + ', ' : '') + 'ma‘lumotlaringiz qabul qilindi. Tez orada siz bilan bog‘lanamiz va daraja testingizni yuboramiz.';
+      p.textContent = (nm ? nm + ', ' : '') + 'ma\'lumotlaringiz qabul qilindi. Tez orada siz bilan bog\'lanamiz va daraja testingizni yuboramiz.';
       panel.appendChild(p);
 
       var a = document.createElement('a');

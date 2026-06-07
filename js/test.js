@@ -584,7 +584,7 @@
 
     /* Crest image */
     dom.resultCrestImg.src = 'assets/logos/' + tier.key + '.svg';
-    dom.resultCrestImg.alt = tier.name + ' daraja gerbi';
+    dom.resultCrestImg.alt = tier.name + ' daraja belgisi';
 
     /* Tier badge */
     dom.tierDot.className = 'tier-dot';
