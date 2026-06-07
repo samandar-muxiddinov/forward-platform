@@ -24,6 +24,36 @@
         safeLocalStorageGet: function (k) { try { return localStorage.getItem(k); } catch (_) { return null; } }
       };
 
+  /* ---- Config + backend submit (Phase 2) ---- */
+  var CFG = window.FORWARD_CONFIG || {};
+  function apiUrl(path) {
+    var base = (CFG.api && typeof CFG.api.base === 'string') ? CFG.api.base : '';
+    return base.replace(/\/+$/, '') + path;
+  }
+  function readStudent() {
+    try {
+      var raw = sec.safeLocalStorageGet('forward_student');
+      if (!raw) return {};
+      var o = JSON.parse(raw);
+      return o && typeof o === 'object' ? o : {};
+    } catch (e) { return {}; }
+  }
+  /* Natijani admin panelga yuboradi (fire-and-forget; UI'ni bloklamaydi) */
+  function postResult(tierKey, pct, group) {
+    var s = readStudent();
+    var body = { tier: tierKey, percent: pct, group: group, name: s.name || '', phone: s.phone || '' };
+    try {
+      if (typeof fetch === 'function') {
+        fetch(apiUrl('/api/test-results'), {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify(body),
+          keepalive: true
+        }).catch(function () {});
+      }
+    } catch (e) {}
+  }
+
   /* Fisher-Yates shuffle — returns a new shuffled array */
   function shuffle(arr) {
     var a = arr.slice();
@@ -533,6 +563,9 @@
       ts:      Date.now()
     };
     sec.safeLocalStorageSet('forward_test_result', JSON.stringify(resultData));
+
+    /* Backend'ga yuborish — admin panelda ko'rinadi, telefon orqali arizaga bog'lanadi */
+    postResult(tier.key, pct, state.group);
 
     /* Build result screen */
     buildResultScreen(tier, pct, state.group);

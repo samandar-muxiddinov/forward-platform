@@ -39,10 +39,20 @@ window.FORWARD_CONFIG = {
   // --- TO'LOV TIZIMLARI (SWOT: Payme, Click, Uzum) ---
   payments: ["Payme", "Click", "Uzum Bank"],
 
+  // --- API (Phase 2 backend) ---
+  // base bo'sh = same-origin (sayt va backend bitta domenda, yoki Node server
+  // saytni ham ko'rsatadi). Backend boshqa domenda bo'lsa, manzilini yozing,
+  // masalan: "https://api.forward.uz" — VA o'sha domenni index.html hamda
+  // daraja-test.html dagi CSP (connect-src) va _headers fayliga ham qo'shing.
+  api: {
+    base: ""
+  },
+
   // --- FORMA YUBORISH MANZILI ---
-  // Phase 1 (statik) uchun: bu yerga Formspree yoki Telegram-proxy URL'ini
-  // qo'ying. Bo'sh bo'lsa, forma xavfsiz "demo" rejimida ishlaydi
-  // (ma'lumot brauzerda saqlanadi, hech qayerga yuborilmaydi).
+  // Bo'sh bo'lsa, forma yuqoridagi api.base orqali backend'ga yuboradi
+  // (<base>/api/applications). Server o'chiq/ulanmagan bo'lsa, ma'lumot
+  // brauzerda zaxiraga olinadi (lead yo'qolmaydi). Tashqi xizmat
+  // (masalan Formspree) ishlatsangiz, bu yerga to'liq URL yozing.
   form: {
     endpoint: "",          // masalan: "https://formspree.io/f/xxxx"
     method:   "POST"

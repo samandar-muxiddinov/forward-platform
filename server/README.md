@@ -64,9 +64,18 @@ npm run create-admin   # admin yaratish/parol tiklash: node src/create-admin.js 
 4. `data/` papkasini doimiy diskka joylang va muntazam **zaxira** oling
 5. Render / Railway / VPS — barchasida ishlaydi (faqat Node + doimiy disk kerak)
 
-## Saytni backend'ga ulash (keyingi qadam)
-Statik saytdagi forma hozir "demo" rejimda. Ulash uchun `js/config.js` da:
-```js
-form: { endpoint: "https://<server-domeningiz>/api/applications", method: "POST" }
-```
-Daraja testi natijasini ham `POST /api/test-results` ga yuborish keyingi bosqichda qo'shiladi.
+## Sayt ↔ backend ulanishi
+Sayt allaqachon backend'ga ulangan (`js/config.js` → `api.base`):
+- `api.base: ""` (standart) = **same-origin** — sayt va backend bitta domenda,
+  yoki `SERVE_SITE=true` bilan shu server saytni ham ko'rsatadi.
+- Backend **boshqa domenda** bo'lsa: `api.base` ga uni yozing (masalan
+  `https://api.forward.uz`) VA o'sha domenni `index.html` / `daraja-test.html`
+  dagi CSP `connect-src` ga hamda `_headers` ga qo'shing; server tomonida
+  `ALLOWED_ORIGINS` ga sayt domenini qo'shing (CORS).
+
+Forma → `POST /api/applications`, daraja testi → `POST /api/test-results`
+(telefon orqali arizaga avtomatik bog'lanadi). Server o'chiq/oflayn bo'lsa,
+ariza brauzer xotirasiga zaxiralanadi — lead yo'qolmaydi.
+
+> ⚠️ Sayt CSP'sida `upgrade-insecure-requests` bor: jonli saytda backend ham
+> **HTTPS** bo'lishi shart (aks holda aralash-kontent (mixed content) bloklanadi).

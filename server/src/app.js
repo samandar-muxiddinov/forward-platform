@@ -17,27 +17,27 @@ const app = express();
 if (config.trustProxy) app.set('trust proxy', 1);
 app.disable('x-powered-by');
 
-// Xavfsizlik sarlavhalari. CSP admin SPA uchun moslangan (inline JS yo'q).
-app.use(
-  helmet({
-    contentSecurityPolicy: {
-      useDefaults: true,
-      directives: {
-        'default-src': ["'self'"],
-        'base-uri': ["'self'"],
-        'frame-ancestors': ["'none'"],
-        'object-src': ["'none'"],
-        'img-src': ["'self'", 'data:'],
-        'style-src': ["'self'"],
-        'script-src': ["'self'"],
-        'connect-src': ["'self'"],
-        'font-src': ["'self'", 'data:'],
-        'form-action': ["'self'"],
-      },
-    },
-    crossOriginEmbedderPolicy: false,
-  })
-);
+// Baseline xavfsizlik sarlavhalari (CSP'siz) — barcha javoblar uchun.
+app.use(helmet({ contentSecurityPolicy: false, crossOriginEmbedderPolicy: false }));
+
+// Qat'iy CSP faqat admin SPA va API uchun (inline JS yo'q). Statik marketing
+// sayt o'zining meta-CSP'siga ega (u Google Fonts'ga ruxsat beradi), shuning
+// uchun unga server tomonidan qat'iy CSP qo'llanmaydi.
+app.use(['/admin', '/api'], helmet.contentSecurityPolicy({
+  useDefaults: true,
+  directives: {
+    'default-src': ["'self'"],
+    'base-uri': ["'self'"],
+    'frame-ancestors': ["'none'"],
+    'object-src': ["'none'"],
+    'img-src': ["'self'", 'data:'],
+    'style-src': ["'self'"],
+    'script-src': ["'self'"],
+    'connect-src': ["'self'"],
+    'font-src': ["'self'", 'data:'],
+    'form-action': ["'self'"],
+  },
+}));
 
 app.use(express.json({ limit: '32kb' }));
 app.use(express.urlencoded({ extended: false, limit: '32kb' }));

@@ -15,21 +15,24 @@ Phase 2 da bajarilgani:
 - Ochiq API: `POST /api/applications`, `POST /api/test-results`
 - Xavfsizlik: scrypt parol, sessiya (httpOnly cookie), CSRF, RBAC, rate-limit,
   akkaunt qulflash, audit log, helmet CSP
-- Hammasi lokal sinovdan o'tdi (14/14 API testi, 5 ta skrinshot: desktop+mobil)
+- **Sayt ↔ backend ULANDI ✅**: ro'yxat formasi → `/api/applications`,
+  daraja testi → `/api/test-results` (telefon orqali arizaga bog'lanadi).
+  Server o'chiq bo'lsa — brauzerga zaxira. HTTPS orqali e2e sinovdan o'tdi.
+- Hammasi lokal sinovdan o'tdi (14/14 API + e2e, skrinshotlar: desktop+mobil)
 
 ## 2. Qabul qilingan qarorlar
 - Yo'l: avval admin+backend (to'liq nazorat), keyin sayt dizayni/animatsiya/mobil.
 - Daraja belgilari: **geometrik gerblar** yaratilgan, LEKIN ⤵ soddalashtirish kerak.
 
 ## 3. ⭐ KEYINGI ISHLAR (navbat bilan)
-1. **Saytni backend'ga ulash:** `js/config.js` da `form.endpoint` → `/api/applications`;
-   `js/test.js` ga natijani `POST /api/test-results` ga yuborish; demo-fallback saqlansin.
+1. ✅ ~~Saytni backend'ga ulash~~ — BAJARILDI (forma + test → API, telefon bog'lash).
 2. **Gerb/logoni soddalashtirish** (foydalanuvchi ko'rsatmasi 2026-06-07):
    "belgilar juda murakkab... darajalar unvon kabi ko'rinsin, ammo soddaroq;
    logo sodda, professional, ortiqcha bezaksiz." → `assets/logos/*.svg` ni qayta ishlash.
 3. **Sayt dizayni:** animatsiya, matnlar, mobil ko'rinish sayqali.
 4. (Ixtiyoriy) O'quvchi/ota-ona kabinetlari (hozir faqat admin bor).
 5. **Deploy:** hosting tanlash (Render/Railway/VPS) + domen + SESSION_SECRET.
+   ⚠️ Jonli saytda backend HTTPS bo'lishi shart (CSP upgrade-insecure-requests).
 
 ## 4. FOYDALANUVCHIDAN KERAK (so'ralganda)
 - [ ] Aloqa: telefon, Telegram, email, manzil, Instagram (admin → Sozlamalar yoki `js/config.js`)
@@ -52,5 +55,5 @@ To'liq qo'llanma: `server/README.md`.
 - Baza fayli (`server/data/*.db`) va `node_modules` — git'ga TUSHMAYDI.
 
 ## 7. Eslatma
-- Sayt formasi hali **demo rejimda** (backend'ga ulanmagan — №1 ish).
+- Sayt formasi va daraja testi endi **backend'ga ulangan** (same-origin standart).
 - Admin parolini birinchi kirishdan keyin Sozlamalardan o'zgartirish tavsiya etiladi.

@@ -270,26 +270,15 @@
         ts: new Date().toISOString()
       };
 
-      var endpoint = (CFG.form && CFG.form.endpoint) ? CFG.form.endpoint : '';
+      var apiBase = (CFG.api && typeof CFG.api.base === 'string') ? CFG.api.base : '';
+      var endpoint = (CFG.form && CFG.form.endpoint)
+        ? CFG.form.endpoint
+        : (apiBase.replace(/\/+$/, '') + '/api/applications');
       var submitBtn = $('.form-submit', form);
       if (submitBtn) submitBtn.disabled = true;
 
-      function succeed() {
-        renderSuccess(payload);
-      }
-      function fail() {
-        if (submitBtn) submitBtn.disabled = false;
-        status('Yuborishda xatolik. Iltimos, birozdan so‘ng qayta urining.', 'bad');
-      }
-
-      if (endpoint) {
-        fetch(endpoint, {
-          method: (CFG.form && CFG.form.method) || 'POST',
-          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-          body: JSON.stringify(payload)
-        }).then(function (r) { if (r.ok) succeed(); else fail(); }).catch(fail);
-      } else {
-        /* Demo mode (no backend yet): store locally so nothing is lost */
+      /* Mahalliy zaxira — server o‘chiq/oflayn bo‘lsa ham lead yo‘qolmaydi */
+      function saveLocalBackup() {
         try {
           var key = 'forward_registrations';
           var arr = [];
@@ -300,8 +289,38 @@
           if (typeof SEC.safeLocalStorageSet === 'function') SEC.safeLocalStorageSet(key, val);
           else localStorage.setItem(key, val);
         } catch (e6) {}
-        succeed();
       }
+      /* O‘quvchi profilini eslab qolamiz — daraja testi natijasi shu arizaga bog‘lanadi */
+      function saveStudentProfile() {
+        try {
+          var prof = JSON.stringify({
+            name: (payload.student.firstName + ' ' + payload.student.lastName).trim(),
+            phone: payload.student.phone || ''
+          });
+          if (typeof SEC.safeLocalStorageSet === 'function') SEC.safeLocalStorageSet('forward_student', prof);
+          else localStorage.setItem('forward_student', prof);
+        } catch (e7) {}
+      }
+
+      function succeed() { saveStudentProfile(); renderSuccess(payload); }
+
+      fetch(endpoint, {
+        method: (CFG.form && CFG.form.method) || 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(payload)
+      }).then(function (r) {
+        if (r.ok) { succeed(); return; }
+        if (r.status === 429) {
+          if (submitBtn) submitBtn.disabled = false;
+          status('Juda ko‘p urinish. Iltimos, birozdan so‘ng qayta urining.', 'bad');
+          return;
+        }
+        /* Server xatosi — yo‘qotmaymiz: mahalliy zaxira + muvaffaqiyat */
+        saveLocalBackup(); succeed();
+      }).catch(function () {
+        /* Tarmoq xatosi / oflayn — mahalliy zaxira + muvaffaqiyat */
+        saveLocalBackup(); succeed();
+      });
     });
 
     /* Build the success panel with DOM APIs (no innerHTML injection) */
