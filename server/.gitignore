@@ -1,0 +1,16 @@
+# Dependencies
+node_modules/
+
+# Database (never commit real data)
+data/*.db
+data/*.db-shm
+data/*.db-wal
+data/*.sqlite
+
+# Secrets / local env
+.env
+.env.local
+
+# Logs
+*.log
+npm-debug.log*

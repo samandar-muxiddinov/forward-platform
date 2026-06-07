@@ -1,48 +1,56 @@
-# FORWARD — Ertangi reja / Ish holati (handoff)
+# FORWARD — Ish holati / Ertangi reja (handoff)
 
-> Bu fayl — ish xotirasi. Ertaga shu yerdan davom etamiz.
-> **Sana:** 2026-06-06. **Branch:** `claude/quirky-wright-x5kg7` (push qilingan).
+> Bu fayl — ish xotirasi. Yangi sessiyada shu yerdan davom etamiz.
+> **Branch:** `claude/quirky-wright-x5kg7` (push qilinadi).
 
 ## 1. Holat
-**Phase 1 (premium statik sayt) — TUGALLANDI va push qilindi.** 2 ta commit:
-- `Build FORWARD platform Phase 1: premium site, heraldic crests, security, PWA`
-- `Harden scroll-reveal: graceful degradation + instant above-the-fold reveal`
+**Phase 1 (premium statik sayt) — TUGALLANGAN.**
+**Phase 2 (admin + backend) — POYDEVOR TAYYOR ✅** (`server/` papkasi).
 
-Tekshiruvdan o'tdi: JS/JSON/SVG ✓, 24/24 manzil HTTP 200 ✓, desktop+mobil+test skrinshotlari ✓.
+Phase 2 da bajarilgani:
+- Node.js + Express + SQLite backend
+- Admin panel (qora/oltin SPA): **bosh panel** (statistika, 14-kunlik grafik, taqsimotlar),
+  **arizalar** (qidiruv/filtr/CSV/tafsilot/holat/izoh/o'chirish), **test natijalari**,
+  **sozlamalar** (aloqa + parol), **audit jurnali**
+- Ochiq API: `POST /api/applications`, `POST /api/test-results`
+- Xavfsizlik: scrypt parol, sessiya (httpOnly cookie), CSRF, RBAC, rate-limit,
+  akkaunt qulflash, audit log, helmet CSP
+- Hammasi lokal sinovdan o'tdi (14/14 API testi, 5 ta skrinshot: desktop+mobil)
 
 ## 2. Qabul qilingan qarorlar
-- Yo'l: **avval premium sayt (Phase 1), keyin admin/backend (Phase 2)**.
-- Daraja belgilari: **geometrik heraldik gerblar** (emoji o'rniga) — yaratildi.
+- Yo'l: avval admin+backend (to'liq nazorat), keyin sayt dizayni/animatsiya/mobil.
+- Daraja belgilari: **geometrik gerblar** yaratilgan, LEKIN ⤵ soddalashtirish kerak.
 
-## 3. ERTAGA BERILADIGAN SAVOLLAR (qayta so'rash)
-1. **Keyingi qadam:** Phase 2 (admin + backend) / Phase 1ni sayqallash / live ko'rib chiqish?
-   - *(2026-06-06: foydalanuvchi "ertaga hal qilamiz" dedi.)*
-2. **Daraja gerblari ma'qulmi?** Ha qoldiramiz / kichik tuzatish / boshqa uslub?
-   - *(2026-06-06: "ertaga ko'rib chiqaman" dedi.)*
+## 3. ⭐ KEYINGI ISHLAR (navbat bilan)
+1. **Saytni backend'ga ulash:** `js/config.js` da `form.endpoint` → `/api/applications`;
+   `js/test.js` ga natijani `POST /api/test-results` ga yuborish; demo-fallback saqlansin.
+2. **Gerb/logoni soddalashtirish** (foydalanuvchi ko'rsatmasi 2026-06-07):
+   "belgilar juda murakkab... darajalar unvon kabi ko'rinsin, ammo soddaroq;
+   logo sodda, professional, ortiqcha bezaksiz." → `assets/logos/*.svg` ni qayta ishlash.
+3. **Sayt dizayni:** animatsiya, matnlar, mobil ko'rinish sayqali.
+4. (Ixtiyoriy) O'quvchi/ota-ona kabinetlari (hozir faqat admin bor).
+5. **Deploy:** hosting tanlash (Render/Railway/VPS) + domen + SESSION_SECRET.
 
-## 4. FOYDALANUVCHIDAN KERAK BO'LGAN MA'LUMOTLAR
-- [ ] Aloqa (`js/config.js` ga): **telefon**, **Telegram** (kanal/bot), **email**, **manzil**, **Instagram**
-- [ ] Haqiqiy **domen** (masalan `forward.uz`?) — SEO, `.well-known/security.txt`, `sitemap.xml`, JSON-LD, `robots.txt` da `forward.uz` o'rniga qo'yiladi
-- [ ] **`FORWARD_Full_Roadmap_BlackGold.docx`** — hali yuborilmagan (SWOT ikki marta kelgan). "13 ta texnik kamchilik" ro'yxatini aniqlashtiradi
-- [ ] Forma qabuli: Telegram/Formspree manzilini bering YOKI Phase 2 backendni kutamiz
+## 4. FOYDALANUVCHIDAN KERAK (so'ralganda)
+- [ ] Aloqa: telefon, Telegram, email, manzil, Instagram (admin → Sozlamalar yoki `js/config.js`)
+- [ ] Haqiqiy **domen** (SEO/sitemap/security.txt da `forward.uz` o'rniga)
+- [ ] **`FORWARD_Full_Roadmap_BlackGold.docx`** — hali yuborilmagan (SWOT 2 marta kelgan)
+- [ ] Hosting qarori (Phase 2 ni jonli ishga tushirish uchun)
 
-## 5. PHASE 2 REJASI (admin + backend) — boshlashga tayyor
-- Texnologiya: yengil **Node.js + SQLite** (oson ishga tushadi) yoki kelishilgan stack
-- Funksiyalar: haqiqiy ro'yxat saqlash; o'quvchi/ota-ona/**admin** kabinetlari; daraja testi natijalari bazasi; admin **boshqaruv paneli** (arizalar, o'quvchilar, statistika)
-- Xavfsizlik: parol xeshlash (argon2id), sessiya/JWT, RBAC + admin 2FA, server-side validatsiya, CSRF, rate-limit, audit-log, sirlarni env'da saqlash (batafsil: `SECURITY.md`)
-- **Boshlashdan oldin so'raladi:** hosting (server ishlata olasizmi: Render/Railway/VPS?), admin loginini kim boshqaradi, qaysi maydonlar adminda ko'rinsin
+## 5. Admin panelni ishga tushirish (lokal)
+```bash
+cd server && npm install && npm run seed && npm start
+# Admin: http://localhost:4000/admin/   (parol seed paytida konsolda chiqadi)
+```
+To'liq qo'llanma: `server/README.md`.
 
-## 6. Saytni ko'rish / deploy
-- GitHub Pages: Settings → Pages → branch `claude/quirky-wright-x5kg7`
-- Lokal: `python3 -m http.server 8000` → `localhost:8000`
+## 6. Fayllar xaritasi
+- **Sayt (Phase 1):** `index.html`, `daraja-test.html`, `css/`, `js/`, `assets/`
+- **Backend (Phase 2):** `server/server.js`, `server/src/` (config, db, auth, util, routes/),
+  `server/admin/` (SPA: index.html, assets/admin.css, assets/app.js)
+- **Hujjatlar:** `server/README.md`, `SECURITY.md`, `docs/`
+- Baza fayli (`server/data/*.db`) va `node_modules` — git'ga TUSHMAYDI.
 
-## 7. Fayllar xaritasi
-- `index.html`, `daraja-test.html` — sahifalar
-- `css/tokens.css` (dizayn-tizimi), `css/main.css`, `css/test.css`
-- `js/config.js` (⚙️ aloqa), `js/security.js`, `js/main.js`, `js/test.js`, `js/sw-register.js`
-- `assets/logos/` (nexus/dominion/imperial/forward-mark + preview.html + BRAND.md), `assets/icons/`, `assets/og/`
-- Xavfsizlik: `_headers`, `netlify.toml`, `vercel.json`, `.htaccess`, `.well-known/security.txt`, `SECURITY.md`, `docs/SECURITY-CHECKLIST.md`
-- PWA/SEO: `manifest.webmanifest`, `service-worker.js`, `offline.html`, `robots.txt`, `sitemap.xml`, `docs/seo-head.html`
-
-## 8. Eslatma
-- Ro'yxat formasi hozir **demo rejimda** (ma'lumot brauzerda saqlanadi). Haqiqiy qabul Phase 2 yoki forma-endpoint bilan.
+## 7. Eslatma
+- Sayt formasi hali **demo rejimda** (backend'ga ulanmagan — №1 ish).
+- Admin parolini birinchi kirishdan keyin Sozlamalardan o'zgartirish tavsiya etiladi.
