@@ -188,6 +188,16 @@
 .to-top { transition: opacity var(--t-base), transform var(--t-base) var(--ease), box-shadow var(--t-base), background var(--t-base); }
 .to-top:hover { background: var(--gold-light); transform: translateY(-3px) scale(1.06); box-shadow: var(--glow-gold); }
 
+/* ---- Daraja-test sahifasi: oltin CTA tugmalarida yorug'lik yugurishi ---- */
+.btn-start, .btn-register { position: relative; overflow: hidden; }
+.btn-start::before, .btn-register::before {
+  content: ''; position: absolute; top: 0; left: -150%; width: 60%; height: 100%;
+  background: linear-gradient(100deg, transparent, rgba(255,255,255,0.45), transparent);
+  transform: skewX(-20deg); transition: left 0.6s var(--ease); pointer-events: none;
+}
+.btn-start:hover::before, .btn-register:hover::before { left: 150%; }
+@media (prefers-reduced-motion: reduce) { .btn-start::before, .btn-register::before { display: none; } }
+
 /* ---- Reveal-stagger: qolgan karta to'rlari ---- */
 @media (prefers-reduced-motion: no-preference) {
   .feature-grid > [data-reveal]:nth-child(3n+2),

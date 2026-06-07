@@ -713,7 +713,7 @@ body::before {
   width: 140px;
   height: 140px;
   object-fit: contain;
-  animation: crестReveal 0.8s var(--ease-out) both;
+  animation: crestReveal 0.8s var(--ease-out) both;
   filter: drop-shadow(0 12px 32px rgba(201,168,76,0.35));
 }
 
@@ -722,7 +722,7 @@ body::before {
 .result-screen[data-tier="dominion"] .result-crest-img { filter: drop-shadow(0 12px 32px rgba(124,92,191,0.40)); }
 .result-screen[data-tier="imperial"] .result-crest-img { filter: drop-shadow(0 12px 32px rgba(201,168,76,0.45)); }
 
-@keyframes crестReveal {
+@keyframes crestReveal {
   0%   { opacity: 0; transform: scale(0.6) rotate(-8deg); }
   60%  { transform: scale(1.08) rotate(2deg); }
   100% { opacity: 1; transform: scale(1) rotate(0deg); }
