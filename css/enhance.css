@@ -76,3 +76,138 @@
 /* ---- Brend belgisi: hover'da nozik burilish ---- */
 .brand-mark { transition: transform var(--t-base) var(--ease); }
 .brand:hover .brand-mark { transform: rotate(-6deg) scale(1.08); }
+
+
+/* =====================================================================
+   PHASE 2b — qolgan bo'limlar sayqali
+   divisions · tiers · steps · features · pricing · form · faq ·
+   contact · footer + global mayda detallar. Hammasi tokens.css
+   o'zgaruvchilaridan foydalanadi va reduced-motion'ni hurmat qiladi.
+   ===================================================================== */
+
+/* ---- Global: matn belgilash va scrollbar (premium detal) ---- */
+::selection      { background: var(--gold); color: var(--navy); }
+::-moz-selection { background: var(--gold); color: var(--navy); }
+@supports (scrollbar-color: auto) {
+  html { scrollbar-color: var(--gold-deep) var(--navy-900); scrollbar-width: thin; }
+}
+::-webkit-scrollbar { width: 11px; height: 11px; }
+::-webkit-scrollbar-track { background: var(--navy-900); }
+::-webkit-scrollbar-thumb {
+  background: var(--gold-deep); border-radius: var(--r-pill);
+  border: 3px solid var(--navy-900);
+}
+::-webkit-scrollbar-thumb:hover { background: var(--gold); }
+
+/* ---- Eyebrow: oldida nozik oltin chiziq (bo'limlarni birlashtiradi) ---- */
+.eyebrow { display: inline-flex; align-items: center; gap: 0.7rem; }
+.eyebrow::before {
+  content: ''; width: 1.6rem; height: 1px; flex: none;
+  background: linear-gradient(90deg, var(--gold), transparent);
+}
+
+/* ---- Divisions: chuqurroq hover, suzuvchi raqam, strelka ---- */
+.division-card { transition: transform var(--t-base) var(--ease), border-color var(--t-base), box-shadow var(--t-base); }
+.division-card:hover { box-shadow: var(--shadow-lg); }
+.division-no { transition: transform var(--t-slow) var(--ease), opacity var(--t-base); }
+.division-card:hover .division-no { transform: scale(1.18) translate(-3px, 3px); opacity: 0.12; }
+.division-card::before { transition: height var(--t-base) var(--ease); }
+.division-card:hover::before { height: 5px; }
+.card-link span { transition: transform var(--t-base) var(--ease); }
+.card-link:hover span { transform: translateX(3px); }
+
+/* ---- Tiers: gerb rangli porlashi + jonli daraja nuqtasi ---- */
+.tier-crest img { transition: transform var(--t-slow) var(--ease), filter var(--t-slow) var(--ease); }
+.tier-card.nexus:hover    .tier-crest img { filter: drop-shadow(0 8px 24px rgba(78,158,255,0.45)); }
+.tier-card.dominion:hover .tier-crest img { filter: drop-shadow(0 8px 24px rgba(124,92,191,0.45)); }
+.tier-card.imperial:hover .tier-crest img { filter: drop-shadow(0 8px 24px rgba(201,168,76,0.50)); }
+@media (prefers-reduced-motion: no-preference) {
+  .tier-dot { animation: fwdDotPulse 2.6s ease-in-out infinite; }
+}
+
+/* ---- How it works: hover ko'tarilish + raqam to'lishi ---- */
+.step { transition: transform var(--t-base) var(--ease), border-color var(--t-base), box-shadow var(--t-base); }
+.step:hover { transform: translateY(-4px); border-color: var(--border-strong); box-shadow: var(--shadow-md); }
+.step-no { transition: background var(--t-base) var(--ease), color var(--t-base) var(--ease), border-color var(--t-base); }
+.step:hover .step-no { background: var(--gold); color: var(--navy); border-color: var(--gold); }
+
+/* ---- Features: chuqurlik soyasi ---- */
+.feature { transition: transform var(--t-base) var(--ease), border-color var(--t-base), box-shadow var(--t-base); }
+.feature:hover { box-shadow: var(--shadow-md); }
+
+/* ---- Pricing: hover + tanlangan tarif diqqatni tortadi ---- */
+.price-card { transition: transform var(--t-base) var(--ease), border-color var(--t-base), box-shadow var(--t-base); }
+.price-card:hover { transform: translateY(-6px); border-color: var(--border-strong); box-shadow: var(--shadow-lg); }
+.price-card.featured:hover { border-color: var(--gold); }
+@media (min-width: 921px) {
+  .price-card.featured { transform: scale(1.04); z-index: 1; }
+  .price-card.featured:hover { transform: scale(1.04) translateY(-6px); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .price-card.featured { animation: fwdFeaturedGlow 3.8s ease-in-out infinite; }
+}
+
+/* ---- Registration: forma jonlanishi, fokus halqasi, tanlov belgisi ---- */
+.reg-form { transition: border-color var(--t-base), box-shadow var(--t-base); }
+.reg-form:focus-within { border-color: var(--border-strong); box-shadow: var(--shadow-md); }
+.field input, .field select, .field textarea { transition: border-color var(--t-base), background var(--t-base), box-shadow var(--t-base); }
+.field input:focus, .field select:focus, .field textarea:focus { box-shadow: 0 0 0 3px var(--gold-dim); }
+.div-opt { transition: border-color var(--t-base), background var(--t-base), transform var(--t-base) var(--ease); }
+.div-opt:hover { transform: translateY(-2px); }
+.div-opt::after {
+  content: '✓'; position: absolute; top: 0.45rem; right: 0.5rem;
+  width: 18px; height: 18px; border-radius: 50%;
+  background: var(--gold); color: var(--navy);
+  font-size: 0.7rem; font-weight: 700; line-height: 1; display: grid; place-items: center;
+  pointer-events: none; opacity: 0; transform: scale(0.4);
+  transition: opacity var(--t-base), transform var(--t-base) var(--ease);
+}
+.div-opt:has(input:checked)::after { opacity: 1; transform: scale(1); }
+.form-submit span { transition: transform var(--t-base) var(--ease); }
+.form-submit:hover span { transform: translateX(4px); }
+
+/* ---- FAQ: hover, ochiq holat urg'usi, yumshoq ochilish ---- */
+.faq-item { transition: border-color var(--t-base), background var(--t-base); }
+.faq-item:hover { border-color: var(--border-strong); }
+.faq-item[open] { border-color: var(--border-strong); background: var(--glass-2); }
+@media (prefers-reduced-motion: no-preference) {
+  .faq-item[open] .faq-body { animation: fwdFaqOpen var(--t-base) var(--ease-out); }
+}
+
+/* ---- Contact: telegram ikonkasi "uchadi" + qator urg'usi ---- */
+.cta-ico { transition: transform var(--t-base) var(--ease); }
+.contact-cta:hover .cta-ico { transform: translate(4px, -4px) rotate(8deg); }
+.contact-list li { transition: border-color var(--t-base); }
+.contact-list li:hover { border-bottom-color: var(--border-strong); }
+
+/* ---- Footer: link siljishi ---- */
+.footer-col a { transition: color var(--t-base), padding-left var(--t-base) var(--ease); }
+.footer-col a:hover { padding-left: 0.4rem; }
+
+/* ---- Back-to-top: hover ko'tarilishi ---- */
+.to-top { transition: opacity var(--t-base), transform var(--t-base) var(--ease), box-shadow var(--t-base), background var(--t-base); }
+.to-top:hover { background: var(--gold-light); transform: translateY(-3px) scale(1.06); box-shadow: var(--glow-gold); }
+
+/* ---- Reveal-stagger: qolgan karta to'rlari ---- */
+@media (prefers-reduced-motion: no-preference) {
+  .feature-grid > [data-reveal]:nth-child(3n+2),
+  .pricing-grid > [data-reveal]:nth-child(2),
+  .steps       > [data-reveal]:nth-child(2) { transition-delay: 0.10s; }
+  .feature-grid > [data-reveal]:nth-child(3n),
+  .pricing-grid > [data-reveal]:nth-child(3),
+  .steps       > [data-reveal]:nth-child(3) { transition-delay: 0.20s; }
+  .steps       > [data-reveal]:nth-child(4) { transition-delay: 0.30s; }
+}
+
+@keyframes fwdDotPulse {
+  0%, 100% { transform: scale(1);    opacity: 1;    }
+  50%      { transform: scale(1.25); opacity: 0.55; }
+}
+@keyframes fwdFeaturedGlow {
+  0%, 100% { box-shadow: var(--glow-gold); }
+  50%      { box-shadow: 0 14px 50px rgba(201,168,76,0.42); }
+}
+@keyframes fwdFaqOpen {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: none; }
+}
