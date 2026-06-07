@@ -1,0 +1,78 @@
+/* =====================================================================
+   FORWARD — enhance.css  (Phase 2 dizayn sayqali)
+   Hero kirish animatsiyasi, jonli ambient fon, tugma yaltirashi va
+   reveal-stagger. Barchasi prefers-reduced-motion'ni hurmat qiladi:
+   harakat o'chirilsa, sahifa to'liq ko'rinadigan statik holatda qoladi.
+   main.css'dan keyin ulanadi (uni o'zgartirmaydi).
+   ===================================================================== */
+
+@media (prefers-reduced-motion: no-preference) {
+
+  /* ---- Hero: bosqichma-bosqich kirish ---- */
+  .hero-content > * { opacity: 0; transform: translateY(26px); animation: fwdHeroIn 0.9s var(--ease-out) forwards; }
+  .hero-badge   { animation-delay: 0.10s; }
+  .hero-title   { animation-delay: 0.24s; }
+  .hero-sub     { animation-delay: 0.40s; }
+  .hero-actions { animation-delay: 0.56s; }
+  .hero-stats   { animation-delay: 0.72s; }
+  .hero-scroll  { opacity: 0; animation: fwdHeroIn 0.9s var(--ease-out) 1s forwards; }
+
+  /* ---- Hero sarlavhasidagi oltin yumshoq porlash ---- */
+  .hero-title strong { animation: fwdGoldGlow 4.5s ease-in-out 1.2s infinite; }
+
+  /* ---- Hero ortida sekin suzuvchi yorug'lik shar(lar)i ---- */
+  .hero-bg::before, .hero-bg::after {
+    content: ''; position: absolute; border-radius: 50%;
+    filter: blur(70px); opacity: 0.45; pointer-events: none; z-index: 0;
+  }
+  .hero-bg::before {
+    width: 46vw; height: 46vw; max-width: 560px; max-height: 560px; left: -8vw; top: 4%;
+    background: radial-gradient(circle, rgba(201, 168, 76, 0.30), transparent 70%);
+    animation: fwdDriftA 20s ease-in-out infinite;
+  }
+  .hero-bg::after {
+    width: 48vw; height: 48vw; max-width: 600px; max-height: 600px; right: -10vw; bottom: -6%;
+    background: radial-gradient(circle, rgba(78, 158, 255, 0.22), transparent 70%);
+    animation: fwdDriftB 26s ease-in-out infinite;
+  }
+
+  /* ---- Karta to'rlari uchun reveal-stagger (ustun bo'yicha kaskad) ---- */
+  .value-grid > [data-reveal]:nth-child(3n+2),
+  .divisions-grid > [data-reveal]:nth-child(2),
+  .tiers-grid > [data-reveal]:nth-child(2) { transition-delay: 0.12s; }
+  .value-grid > [data-reveal]:nth-child(3n),
+  .divisions-grid > [data-reveal]:nth-child(3),
+  .tiers-grid > [data-reveal]:nth-child(3) { transition-delay: 0.24s; }
+}
+
+@keyframes fwdHeroIn { to { opacity: 1; transform: none; } }
+@keyframes fwdGoldGlow {
+  0%, 100% { text-shadow: 0 0 0 rgba(201, 168, 76, 0); }
+  50%      { text-shadow: 0 0 26px rgba(201, 168, 76, 0.45); }
+}
+@keyframes fwdDriftA {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50%      { transform: translate(8vw, 5vh) scale(1.08); }
+}
+@keyframes fwdDriftB {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50%      { transform: translate(-7vw, -4vh) scale(1.06); }
+}
+
+/* ---- Asosiy tugma: hover'da yorug'lik yugurishi ---- */
+.btn-primary { position: relative; overflow: hidden; }
+.btn-primary::before {
+  content: ''; position: absolute; top: 0; left: -150%; width: 60%; height: 100%;
+  background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.45), transparent);
+  transform: skewX(-20deg); transition: left 0.6s var(--ease); pointer-events: none;
+}
+.btn-primary:hover::before { left: 150%; }
+@media (prefers-reduced-motion: reduce) { .btn-primary::before { display: none; } }
+
+/* ---- Value-kartalarga yumshoq ko'tarilish soyasi ---- */
+.value-card { transition: transform var(--t-base) var(--ease), border-color var(--t-base), box-shadow var(--t-base); }
+.value-card:hover { box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35); }
+
+/* ---- Brend belgisi: hover'da nozik burilish ---- */
+.brand-mark { transition: transform var(--t-base) var(--ease); }
+.brand:hover .brand-mark { transform: rotate(-6deg) scale(1.08); }

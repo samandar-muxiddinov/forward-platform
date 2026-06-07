@@ -6,7 +6,7 @@
 
 'use strict';
 
-const CACHE_VERSION = 'forward-v1';
+const CACHE_VERSION = 'forward-v2';
 
 /**
  * App shell — precached on install.
@@ -19,6 +19,7 @@ const APP_SHELL = [
   '/offline.html',
   '/css/tokens.css',
   '/css/main.css',
+  '/css/enhance.css',
   '/css/test.css',
   '/js/config.js',
   '/js/security.js',
