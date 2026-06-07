@@ -98,6 +98,19 @@
     imperial: { label: 'Imperial', cls: 'ti-imperial', color: '#c9a84c' }
   };
   var STATUS_COLOR = { 'new': '#4e9eff', contacted: '#e0a23a', enrolled: '#36c08a', rejected: '#e0564a' };
+  var STUDENT_STATUS = {
+    active: { label: 'Faol', cls: 'st-enrolled' },
+    paused: { label: "To'xtatilgan", cls: 'st-contacted' },
+    graduated: { label: 'Bitirgan', cls: 'st-new' },
+    archived: { label: 'Arxiv', cls: 'st-rejected' }
+  };
+  var PAY_METHODS = ['Payme', 'Click', 'Uzum', 'Naqd'];
+  var PLAN_LABEL = { nexus: 'Nexus', dominion: 'Dominion', imperial: 'Imperial', custom: 'Maxsus', '': '—' };
+  function fmtMoney(n, cur) {
+    var x = Math.round(Number(n) || 0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+    return x + (cur ? ' ' + cur : '');
+  }
+  function curMonth() { return new Date().toISOString().slice(0, 7); }
 
   var ICON = {
     dashboard: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg>',
@@ -110,7 +123,12 @@
     download: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>',
     close: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 6 6 18M6 6l12 12"/></svg>',
     trash: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/></svg>',
-    menu: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 12h18M3 6h18M3 18h18"/></svg>'
+    menu: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 12h18M3 6h18M3 18h18"/></svg>',
+    students: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>',
+    payments: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>',
+    courses: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M22 10 12 5 2 10l10 5 10-5Z"/><path d="M6 12v5c0 1 2.5 2.5 6 2.5s6-1.5 6-2.5v-5"/></svg>',
+    plus: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>',
+    edit: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>'
   };
 
   function badge(map, key) {
@@ -170,6 +188,9 @@
   var NAV = [
     { id: 'dashboard', label: 'Boshqaruv paneli', icon: 'dashboard' },
     { id: 'applications', label: 'Arizalar', icon: 'apps' },
+    { id: 'students', label: "O'quvchilar", icon: 'students' },
+    { id: 'payments', label: "To'lovlar", icon: 'payments' },
+    { id: 'courses', label: 'Kurslar', icon: 'courses' },
     { id: 'results', label: 'Test natijalari', icon: 'results' },
     { id: 'settings', label: 'Sozlamalar', icon: 'settings' },
     { id: 'audit', label: 'Audit jurnali', icon: 'audit' }
@@ -231,7 +252,7 @@
     document.querySelectorAll('.nav-item').forEach(function (a) {
       a.classList.toggle('active', a.getAttribute('data-route') === state.route);
     });
-    var titles = { dashboard: 'Boshqaruv paneli', applications: 'Arizalar', results: 'Test natijalari', settings: 'Sozlamalar', audit: 'Audit jurnali' };
+    var titles = { dashboard: 'Boshqaruv paneli', applications: 'Arizalar', students: "O'quvchilar", payments: "To'lovlar", courses: 'Kurslar', results: 'Test natijalari', settings: 'Sozlamalar', audit: 'Audit jurnali' };
     var t = $('#pageTitle'); if (t) t.textContent = titles[state.route] || 'FORWARD';
     if ($('.scrim')) toggleSidebar();
   }
@@ -266,8 +287,9 @@
     var cards = [
       { num: s.totalApps, lbl: 'Jami arizalar', cls: '' },
       { num: s.newApps, lbl: 'Yangi arizalar', cls: 'accent-blue' },
-      { num: s.todayApps, lbl: 'Bugun kelgan', cls: 'accent-violet' },
-      { num: s.enrolled, lbl: 'Qabul qilingan', cls: 'accent-green' },
+      { num: s.activeStudents != null ? s.activeStudents : 0, lbl: 'Faol o‘quvchilar', cls: 'accent-green' },
+      { num: fmtMoney(s.monthRevenue || 0), lbl: 'Bu oy tushum (so‘m)', cls: 'accent-violet' },
+      { num: s.enrolled, lbl: 'Qabul qilingan', cls: '' },
       { num: s.totalTests, lbl: 'Test topshirganlar', cls: '' }
     ];
     view.appendChild(h('div', { class: 'stat-grid' }, cards.map(function (c) {
@@ -474,12 +496,22 @@
       [
         h('button', { class: 'btn btn-danger', html: ICON.trash + '<span>O‘chirish</span>', on: { click: del } }),
         h('div', { style: { flex: '1' } }),
+        h('button', { class: 'btn btn-ghost', html: ICON.students + '<span>O‘quvchiga aylantirish</span>', on: { click: enroll } }),
         h('button', { class: 'btn btn-ghost', text: 'Yopish', on: { click: close } }),
         h('button', { class: 'btn btn-primary', text: 'Saqlash', on: { click: save } })
       ]
     );
 
     function close() { modal.remove(); }
+    async function enroll() {
+      try {
+        var r = await api('/api/admin/applications/' + id + '/enroll', { method: 'POST' });
+        toast('O‘quvchiga aylantirildi', 'good'); close(); refreshCurrent(); location.hash = '#/students';
+      } catch (e) {
+        if (e.status === 409) toast('Bu ariza allaqachon o‘quvchiga aylantirilgan', 'bad');
+        else toast('Xatolik yuz berdi', 'bad');
+      }
+    }
     async function save() {
       try {
         await api('/api/admin/applications/' + id, { method: 'PATCH', body: { status: statusSel.value, notes: notes.value } });
@@ -575,6 +607,7 @@
       ),
       buildPasswordCard()
     ));
+    view.appendChild(buildTelegramCard(data));
 
     async function saveContact() {
       var body = {};
@@ -610,6 +643,39 @@
       h('div', { class: 'field' }, h('label', { text: 'Yangi parol' }), nw),
       h('div', { class: 'field' }, h('label', { text: 'Yangi parol (takror)' }), nw2),
       h('button', { class: 'btn btn-primary', text: 'Parolni yangilash', on: { click: change } }), msg
+    );
+  }
+
+  function buildTelegramCard(data) {
+    var enabled = h('input', { type: 'checkbox' }); enabled.checked = data['telegram.enabled'] === '1';
+    var token = h('input', { class: 'input', value: data['telegram.bot_token'] || '', attrs: { placeholder: '123456:ABC-DEF…' } });
+    var chat = h('input', { class: 'input', value: data['telegram.chat_id'] || '', attrs: { placeholder: 'masalan -1001234567890 yoki @kanal' } });
+    var msg = h('div', { class: 'form-msg' });
+    async function save() {
+      try {
+        await api('/api/admin/settings', { method: 'PUT', body: { 'telegram.enabled': enabled.checked ? '1' : '0', 'telegram.bot_token': token.value.trim(), 'telegram.chat_id': chat.value.trim() } });
+        msg.className = 'form-msg good'; msg.textContent = 'Saqlandi ✓'; toast('Telegram sozlamasi saqlandi', 'good');
+      } catch (e) { msg.className = 'form-msg bad'; msg.textContent = 'Xatolik.'; }
+    }
+    async function test() {
+      msg.className = 'form-msg'; msg.textContent = 'Yuborilmoqda…';
+      try {
+        var r = await api('/api/admin/telegram/test', { method: 'POST' });
+        if (r.ok) { msg.className = 'form-msg good'; msg.textContent = '✓ Test xabar yuborildi.'; }
+        else if (r.skipped) { msg.className = 'form-msg bad'; msg.textContent = 'Avval yoqing va token/chat_id ni saqlang.'; }
+        else { msg.className = 'form-msg bad'; msg.textContent = 'Yuborilmadi: ' + (r.error || ('status ' + r.status)); }
+      } catch (e) { msg.className = 'form-msg bad'; msg.textContent = 'Xatolik.'; }
+    }
+    return h('div', { class: 'card', style: { marginTop: '1.2rem' } },
+      h('div', { class: 'card-title', text: 'Telegram bildirishnoma' }),
+      h('div', { class: 'field' }, h('label', { style: { display: 'flex', alignItems: 'center', gap: '.5rem' } }, enabled, h('span', { text: 'Yangi ariza kelganda Telegram xabar yuborilsin' }))),
+      h('div', { class: 'grid-2 even' }, field('Bot token', token), field('Chat ID (yoki @kanal)', chat)),
+      h('div', { style: { display: 'flex', gap: '.6rem' } },
+        h('button', { class: 'btn btn-primary', text: 'Saqlash', on: { click: save } }),
+        h('button', { class: 'btn btn-ghost', text: 'Test xabar', on: { click: test } })
+      ),
+      msg,
+      h('p', { class: 'muted', style: { fontSize: '.78rem', marginTop: '.6rem' }, text: 'Bot yarating (@BotFather), tokenni kiriting; botni guruhga qo‘shing va chat_id ni bering.' })
     );
   }
 
@@ -674,6 +740,354 @@
   }
   async function refreshNewCount() {
     try { var s = await api('/api/admin/stats'); state.newCount = s.newApps; updateNewBadge(); } catch (e) {}
+  }
+
+  /* ---- shared bits for module views ---- */
+  function field(label, control) { return h('div', { class: 'field' }, h('label', { text: label }), control); }
+  function toIntSafe(v) { var n = parseInt(v, 10); return Number.isFinite(n) ? n : null; }
+  function buildPager(pager, data, onGo) {
+    clear(pager);
+    var pages = Math.max(1, Math.ceil(data.total / data.pageSize));
+    pager.appendChild(h('div', { class: 'info', text: 'Jami: ' + data.total + ' ta · ' + data.page + '/' + pages + '-sahifa' }));
+    pager.appendChild(h('div', { class: 'pages' },
+      h('button', { class: 'btn btn-ghost btn-sm', text: '‹ Oldingi', disabled: data.page <= 1, on: { click: function () { onGo(data.page - 1); } } }),
+      h('button', { class: 'btn btn-ghost btn-sm', text: 'Keyingi ›', disabled: data.page >= pages, on: { click: function () { onGo(data.page + 1); } } })
+    ));
+  }
+  function selectFrom(opts, current) {
+    return h('select', { class: 'select' }, opts.map(function (o) {
+      return h('option', { value: o.v, text: o.l, selected: (current || '') === o.v });
+    }));
+  }
+  var DIV_OPTS = [{ v: '', l: '—' }, { v: '1', l: '1–4 sinf' }, { v: '2', l: '5–8 sinf' }, { v: '3', l: '9–11 sinf' }];
+  var TIER_OPTS = [{ v: '', l: '—' }, { v: 'nexus', l: 'Nexus' }, { v: 'dominion', l: 'Dominion' }, { v: 'imperial', l: 'Imperial' }];
+
+  /* =====================================================================
+     STUDENTS
+     ===================================================================== */
+  var stuQuery = { status: '', q: '', page: 1, pageSize: 20 };
+  VIEWS.students = async function (view) {
+    clear(view);
+    var search = h('input', { class: 'input', attrs: { placeholder: 'Ism yoki telefon…', 'aria-label': 'Qidirish' }, value: stuQuery.q });
+    var deb;
+    search.addEventListener('input', function () { clearTimeout(deb); deb = setTimeout(function () { stuQuery.q = search.value.trim(); stuQuery.page = 1; load(); }, 300); });
+    var chips = h('div', { class: 'chips' }, [{ k: '', l: 'Hammasi' }].concat(
+      Object.keys(STUDENT_STATUS).map(function (k) { return { k: k, l: STUDENT_STATUS[k].label }; })
+    ).map(function (c) {
+      return h('button', { class: 'chip' + (stuQuery.status === c.k ? ' active' : ''), 'data-k': c.k, text: c.l, on: { click: function () { stuQuery.status = c.k; stuQuery.page = 1; chips.querySelectorAll('.chip').forEach(function (b) { b.classList.toggle('active', b.getAttribute('data-k') === stuQuery.status); }); load(); } } });
+    }));
+    view.appendChild(h('div', { class: 'toolbar' },
+      h('div', { class: 'search' }, h('span', { html: ICON.search }), search), chips,
+      h('div', { style: { flex: '1' } }),
+      h('button', { class: 'btn btn-primary btn-sm', html: ICON.plus + '<span>Yangi o‘quvchi</span>', on: { click: function () { openStudentForm(); } } })
+    ));
+    var wrap = h('div', { class: 'table-wrap' });
+    var pager = h('div', { class: 'pager' });
+    view.appendChild(wrap); view.appendChild(pager);
+    async function load() {
+      clear(wrap); wrap.appendChild(h('div', { class: 'muted', style: { padding: '1rem' }, text: 'Yuklanmoqda…' }));
+      var data;
+      try { data = await api('/api/admin/students?status=' + encodeURIComponent(stuQuery.status) + '&q=' + encodeURIComponent(stuQuery.q) + '&page=' + stuQuery.page + '&pageSize=' + stuQuery.pageSize); }
+      catch (e) { return showError(wrap, e); }
+      clear(wrap); clear(pager);
+      if (!data.rows.length) { wrap.appendChild(h('div', { class: 'empty' }, h('div', { class: 'big', text: 'O‘quvchi topilmadi' }), h('div', { text: 'Arizalardan «O‘quvchiga aylantirish» orqali yoki «Yangi o‘quvchi».' }))); return; }
+      wrap.appendChild(h('table', {},
+        h('thead', {}, h('tr', {}, h('th', { class: 'num', text: 'ID' }), h('th', { text: 'Ism' }), h('th', { text: 'Bo‘lim' }), h('th', { text: 'Daraja' }), h('th', { text: 'Telefon' }), h('th', { text: 'Holat' }))),
+        h('tbody', {}, data.rows.map(function (r) {
+          return h('tr', { class: 'clickable', on: { click: function () { openStudent(r.id); } } },
+            h('td', { class: 'num muted', text: '#' + r.id }),
+            h('td', { class: 'cell-name', text: r.full_name }),
+            h('td', {}, h('span', { class: 'div-pill', text: DIVISION[r.division || ''] })),
+            h('td', {}, r.tier ? badge(TIER, r.tier) : h('span', { class: 'muted', text: '—' })),
+            h('td', { text: r.phone || '—' }),
+            h('td', {}, badge(STUDENT_STATUS, r.status))
+          );
+        }))
+      ));
+      buildPager(pager, data, function (p) { stuQuery.page = p; load(); });
+    }
+    load();
+  };
+
+  function studentFields(d) {
+    d = d || {};
+    function inp(val, ph) { return h('input', { class: 'input', value: val || '', attrs: ph ? { placeholder: ph } : {} }); }
+    var full = inp(d.full_name), phone = inp(d.phone, '+998…'), grade = inp(d.grade, '7-sinf');
+    var division = selectFrom(DIV_OPTS, d.division), tier = selectFrom(TIER_OPTS, d.tier);
+    var status = h('select', { class: 'select' }, Object.keys(STUDENT_STATUS).map(function (k) { return h('option', { value: k, text: STUDENT_STATUS[k].label, selected: (d.status || 'active') === k }); }));
+    var pname = inp(d.parent_name), pphone = inp(d.parent_phone, '+998…'), address = inp(d.address);
+    var notes = h('textarea', { class: 'textarea', value: d.notes || '', attrs: { placeholder: 'Izoh…' } });
+    var node = h('div', {}, field('To‘liq ism', full),
+      h('div', { class: 'grid-2 even' }, field('Telefon', phone), field('Sinf', grade)),
+      h('div', { class: 'grid-2 even' }, field('Bo‘lim', division), field('Daraja', tier)),
+      field('Holat', status),
+      h('div', { class: 'grid-2 even' }, field('Ota-ona', pname), field('Ota-ona tel.', pphone)),
+      field('Manzil', address), field('Izoh', notes));
+    function values() { return { full_name: full.value, phone: phone.value, grade: grade.value, division: division.value, tier: tier.value, status: status.value, parent_name: pname.value, parent_phone: pphone.value, address: address.value, notes: notes.value }; }
+    return { node: node, values: values };
+  }
+
+  function openStudentForm() {
+    var f = studentFields(null), msg = h('div', { class: 'form-msg' });
+    var modal = buildModal('Yangi o‘quvchi', h('div', {}, f.node, msg), [
+      h('div', { style: { flex: '1' } }),
+      h('button', { class: 'btn btn-ghost', text: 'Bekor', on: { click: function () { modal.remove(); } } }),
+      h('button', { class: 'btn btn-primary', text: 'Qo‘shish', on: { click: save } })
+    ]);
+    async function save() {
+      var v = f.values();
+      if ((v.full_name || '').trim().length < 2) { msg.className = 'form-msg bad'; msg.textContent = 'Ismni kiriting.'; return; }
+      try { await api('/api/admin/students', { method: 'POST', body: v }); toast('Qo‘shildi', 'good'); modal.remove(); if (state.route === 'students') navigate(); }
+      catch (e) { msg.className = 'form-msg bad'; msg.textContent = 'Saqlashda xatolik.'; }
+    }
+  }
+
+  async function openStudent(id) {
+    var data;
+    try { data = await api('/api/admin/students/' + id); } catch (e) { return toast('Yuklab bo‘lmadi', 'bad'); }
+    var s = data.student, f = studentFields(s);
+    var tests = (data.tests || []).map(function (t) {
+      return h('div', { class: 'dist-row' }, badge(TIER, t.tier), h('span', { class: 'name', text: t.percent + '%' }), h('span', { class: 'muted', style: { marginLeft: 'auto', fontSize: '.8rem' }, text: fmtDate(t.created_at) }));
+    });
+    var payList = h('div', {});
+    function renderPays(pays) {
+      clear(payList);
+      if (!pays.length) { payList.appendChild(h('div', { class: 'muted', style: { fontSize: '.85rem' }, text: 'To‘lovlar yo‘q.' })); return; }
+      pays.forEach(function (p) {
+        payList.appendChild(h('div', { class: 'dist-row' },
+          h('span', { class: 'name', style: { width: 'auto' }, text: fmtMoney(p.amount, p.currency) }),
+          p.method ? h('span', { class: 'div-pill', text: p.method }) : null,
+          h('span', { class: 'muted', style: { fontSize: '.8rem' }, text: p.period }),
+          h('span', { class: 'muted', style: { marginLeft: 'auto', fontSize: '.8rem' }, text: fmtDate(p.paid_at || p.created_at) })
+        ));
+      });
+    }
+    renderPays(data.payments || []);
+    function reloadPays() { api('/api/admin/students/' + id).then(function (d) { renderPays(d.payments || []); }).catch(function () {}); }
+    var body = h('div', {}, f.node,
+      tests.length ? h('div', {}, h('div', { class: 'card-title', style: { marginTop: '1rem' }, text: 'Test natijalari' }), tests) : null,
+      h('div', { class: 'card-title', style: { marginTop: '1rem' }, text: 'To‘lovlar' }), payList,
+      h('button', { class: 'btn btn-ghost btn-sm', style: { marginTop: '.6rem' }, html: ICON.plus + '<span>To‘lov qo‘shish</span>', on: { click: function () { openPaymentForm(s, reloadPays); } } })
+    );
+    var modal = buildModal(s.full_name, body, [
+      h('button', { class: 'btn btn-danger', html: ICON.trash + '<span>O‘chirish</span>', on: { click: del } }),
+      h('div', { style: { flex: '1' } }),
+      h('button', { class: 'btn btn-ghost', text: 'Yopish', on: { click: function () { modal.remove(); } } }),
+      h('button', { class: 'btn btn-primary', text: 'Saqlash', on: { click: save } })
+    ]);
+    async function save() { var v = f.values(); if ((v.full_name || '').trim().length < 2) { toast('Ismni kiriting', 'bad'); return; } try { await api('/api/admin/students/' + id, { method: 'PATCH', body: v }); toast('Saqlandi', 'good'); modal.remove(); if (state.route === 'students') navigate(); } catch (e) { toast('Xatolik', 'bad'); } }
+    async function del() { if (!confirm('O‘quvchini o‘chirishni tasdiqlaysizmi?')) return; try { await api('/api/admin/students/' + id, { method: 'DELETE' }); toast('O‘chirildi', 'good'); modal.remove(); if (state.route === 'students') navigate(); } catch (e) { toast('Xatolik', 'bad'); } }
+  }
+
+  async function openPaymentForm(student, onDone) {
+    var fixedId = null, studentSel = null, topNode;
+    if (student) { fixedId = student.id; topNode = field('O‘quvchi', h('input', { class: 'input', value: student.full_name, attrs: { disabled: 'disabled' } })); }
+    else {
+      var list = [];
+      try { var d = await api('/api/admin/students?pageSize=100'); list = d.rows; } catch (e) {}
+      studentSel = h('select', { class: 'select' }, [h('option', { value: '', text: '— tanlang —' })].concat(list.map(function (s) { return h('option', { value: String(s.id), text: s.full_name + ' (' + DIVISION[s.division || ''] + ')' }); })));
+      topNode = field('O‘quvchi', studentSel);
+    }
+    var amount = h('input', { class: 'input', type: 'number', attrs: { min: '0', placeholder: 'masalan 300000' } });
+    var method = h('select', { class: 'select' }, [h('option', { value: '', text: '—' })].concat(PAY_METHODS.map(function (m) { return h('option', { value: m, text: m }); })));
+    var plan = selectFrom([{ v: '', l: '—' }, { v: 'nexus', l: 'Nexus' }, { v: 'dominion', l: 'Dominion' }, { v: 'imperial', l: 'Imperial' }, { v: 'custom', l: 'Maxsus' }], '');
+    var period = h('input', { class: 'input', type: 'month', value: curMonth() });
+    var status = selectFrom([{ v: 'paid', l: 'To‘langan' }, { v: 'pending', l: 'Kutilmoqda' }], 'paid');
+    var note = h('input', { class: 'input', attrs: { placeholder: 'Izoh (ixtiyoriy)' } });
+    var msg = h('div', { class: 'form-msg' });
+    var body = h('div', {}, topNode,
+      h('div', { class: 'grid-2 even' }, field('Summa', amount), field('Usul', method)),
+      h('div', { class: 'grid-2 even' }, field('Reja', plan), field('Davr (oy)', period)),
+      field('Holat', status), field('Izoh', note), msg);
+    var modal = buildModal('To‘lov qo‘shish', body, [
+      h('div', { style: { flex: '1' } }),
+      h('button', { class: 'btn btn-ghost', text: 'Bekor', on: { click: function () { modal.remove(); } } }),
+      h('button', { class: 'btn btn-primary', text: 'Saqlash', on: { click: save } })
+    ]);
+    async function save() {
+      var sid = fixedId || (studentSel && toIntSafe(studentSel.value));
+      if (!sid) { msg.className = 'form-msg bad'; msg.textContent = 'O‘quvchini tanlang.'; return; }
+      var amt = Number(amount.value) || 0;
+      if (amt <= 0) { msg.className = 'form-msg bad'; msg.textContent = 'Summani kiriting.'; return; }
+      try { await api('/api/admin/payments', { method: 'POST', body: { student_id: sid, amount: amt, method: method.value, plan: plan.value, period: period.value, status: status.value, note: note.value } }); toast('To‘lov qo‘shildi', 'good'); modal.remove(); if (typeof onDone === 'function') onDone(); if (state.route === 'payments') navigate(); }
+      catch (e) { msg.className = 'form-msg bad'; msg.textContent = 'Saqlashda xatolik.'; }
+    }
+  }
+
+  /* =====================================================================
+     PAYMENTS
+     ===================================================================== */
+  var payQuery = { period: curMonth() };
+  VIEWS.payments = async function (view) {
+    clear(view);
+    var monthInput = h('input', { class: 'input', type: 'month', value: payQuery.period });
+    monthInput.addEventListener('change', function () { payQuery.period = monthInput.value || curMonth(); load(); });
+    view.appendChild(h('div', { class: 'toolbar' },
+      h('div', { class: 'field', style: { marginBottom: '0', maxWidth: '200px' } }, h('label', { text: 'Davr (oy)' }), monthInput),
+      h('div', { style: { flex: '1' } }),
+      h('button', { class: 'btn btn-primary btn-sm', html: ICON.plus + '<span>To‘lov qo‘shish</span>', on: { click: function () { openPaymentForm(null, function () { load(); }); } } })
+    ));
+    var summaryWrap = h('div', {});
+    var tableWrap = h('div', { class: 'table-wrap' });
+    var debtorsWrap = h('div', { class: 'card' });
+    view.appendChild(summaryWrap);
+    view.appendChild(h('div', { class: 'grid-2' },
+      h('div', { class: 'card' }, h('div', { class: 'card-title', text: 'To‘lovlar' }), tableWrap),
+      debtorsWrap
+    ));
+    async function load() {
+      var sum;
+      try { sum = await api('/api/admin/payments/summary?period=' + encodeURIComponent(payQuery.period)); } catch (e) { return showError(view, e); }
+      clear(summaryWrap);
+      summaryWrap.appendChild(h('div', { class: 'stat-grid' }, [
+        { num: fmtMoney(sum.revenue), lbl: 'Tushum (so‘m) · ' + sum.period, cls: 'accent-green' },
+        { num: sum.count, lbl: 'To‘lovlar soni', cls: '' },
+        { num: sum.debtors.length, lbl: 'Qarzdorlar (faol)', cls: 'accent-blue' }
+      ].map(function (c) { return h('div', { class: 'stat ' + c.cls }, h('div', { class: 'num', text: c.num }), h('div', { class: 'lbl', text: c.lbl })); })));
+
+      clear(debtorsWrap);
+      debtorsWrap.appendChild(h('div', { class: 'card-title', text: 'Qarzdorlar — ' + sum.period }));
+      if (!sum.debtors.length) { debtorsWrap.appendChild(h('div', { class: 'muted', text: 'Barcha faol o‘quvchilar to‘lagan 🎉' })); }
+      else {
+        sum.debtors.forEach(function (dd) {
+          debtorsWrap.appendChild(h('div', { class: 'dist-row' },
+            h('span', { class: 'name', style: { width: 'auto' }, text: dd.full_name }),
+            dd.tier ? badge(TIER, dd.tier) : null,
+            h('button', { class: 'btn btn-ghost btn-sm', style: { marginLeft: 'auto' }, text: 'To‘lov', on: { click: function () { openPaymentForm({ id: dd.id, full_name: dd.full_name }, function () { load(); }); } } })
+          ));
+        });
+      }
+
+      clear(tableWrap); tableWrap.appendChild(h('div', { class: 'muted', style: { padding: '1rem' }, text: 'Yuklanmoqda…' }));
+      var data;
+      try { data = await api('/api/admin/payments?period=' + encodeURIComponent(payQuery.period) + '&pageSize=100'); } catch (e) { return showError(tableWrap, e); }
+      clear(tableWrap);
+      if (!data.rows.length) { tableWrap.appendChild(h('div', { class: 'empty' }, h('div', { class: 'big', text: 'To‘lov yo‘q' }))); return; }
+      tableWrap.appendChild(h('table', {},
+        h('thead', {}, h('tr', {}, h('th', { text: 'O‘quvchi' }), h('th', { class: 'num', text: 'Summa' }), h('th', { text: 'Usul' }), h('th', { text: 'Reja' }), h('th', { text: 'Holat' }), h('th', { text: 'Sana' }), h('th', { text: '' }))),
+        h('tbody', {}, data.rows.map(function (p) {
+          return h('tr', {},
+            h('td', { class: 'cell-name', text: p.full_name }),
+            h('td', { class: 'num', text: fmtMoney(p.amount, p.currency) }),
+            h('td', { text: p.method || '—' }),
+            h('td', { text: PLAN_LABEL[p.plan || ''] }),
+            h('td', {}, h('span', { class: 'badge ' + (p.status === 'paid' ? 'st-enrolled' : 'st-contacted') }, h('span', { class: 'd' }), p.status === 'paid' ? 'To‘langan' : 'Kutilmoqda')),
+            h('td', { class: 'muted', text: fmtDate(p.paid_at || p.created_at) }),
+            h('td', {}, h('button', { class: 'icon-btn', html: ICON.trash, attrs: { title: 'O‘chirish' }, on: { click: function () { delPay(p.id); } } }))
+          );
+        }))
+      ));
+      async function delPay(pid) { if (!confirm('To‘lovni o‘chirasizmi?')) return; try { await api('/api/admin/payments/' + pid, { method: 'DELETE' }); toast('O‘chirildi', 'good'); load(); } catch (e) { toast('Xatolik', 'bad'); } }
+    }
+    load();
+  };
+
+  /* =====================================================================
+     COURSES
+     ===================================================================== */
+  VIEWS.courses = async function (view) {
+    clear(view);
+    view.appendChild(h('div', { class: 'toolbar' },
+      h('div', { style: { flex: '1' } }),
+      h('button', { class: 'btn btn-primary btn-sm', html: ICON.plus + '<span>Yangi kurs</span>', on: { click: function () { openCourseForm(); } } })
+    ));
+    var grid = h('div', { class: 'stat-grid' });
+    view.appendChild(grid);
+    var data;
+    try { data = await api('/api/admin/courses'); } catch (e) { return showError(view, e); }
+    clear(grid);
+    if (!data.rows.length) { view.appendChild(h('div', { class: 'empty' }, h('div', { class: 'big', text: 'Kurs yo‘q' }), h('div', { text: '«Yangi kurs» orqali qo‘shing.' }))); return; }
+    data.rows.forEach(function (c) {
+      grid.appendChild(h('div', { class: 'card', style: { cursor: 'pointer' }, on: { click: function () { openCourse(c.id); } } },
+        h('div', { style: { display: 'flex', gap: '.5rem', marginBottom: '.6rem', flexWrap: 'wrap' } },
+          c.division ? h('span', { class: 'div-pill', text: DIVISION[c.division] }) : null,
+          c.tier ? badge(TIER, c.tier) : null,
+          c.active ? null : h('span', { class: 'badge st-rejected' }, h('span', { class: 'd' }), 'Faol emas')
+        ),
+        h('h3', { style: { fontFamily: 'var(--font-display)', fontSize: '1.3rem', color: 'var(--white)', marginBottom: '.3rem' }, text: c.title }),
+        h('p', { class: 'muted', style: { fontSize: '.85rem', marginBottom: '.6rem' }, text: c.description || '' }),
+        h('div', { class: 'muted', style: { fontSize: '.8rem' }, text: c.lesson_count + ' ta dars' })
+      ));
+    });
+  };
+
+  function courseFieldSet(d) {
+    d = d || {};
+    var title = h('input', { class: 'input', value: d.title || '' });
+    var division = selectFrom(DIV_OPTS, d.division), tier = selectFrom(TIER_OPTS, d.tier);
+    var desc = h('textarea', { class: 'textarea', value: d.description || '' });
+    var sort = h('input', { class: 'input', type: 'number', value: (d.sort != null ? d.sort : 0) });
+    var active = h('input', { type: 'checkbox' }); active.checked = d.active == null ? true : !!d.active;
+    var node = h('div', {}, field('Nomi', title),
+      h('div', { class: 'grid-2 even' }, field('Bo‘lim', division), field('Daraja', tier)),
+      field('Tavsif', desc),
+      h('div', { class: 'grid-2 even' }, field('Tartib', sort),
+        h('div', { class: 'field' }, h('label', { text: 'Faol' }), h('label', { style: { display: 'flex', alignItems: 'center', gap: '.5rem' } }, active, h('span', { class: 'muted', text: 'Ko‘rsatilsin' })))));
+    function values() { return { title: title.value, division: division.value, tier: tier.value, description: desc.value, sort: Number(sort.value) || 0, active: active.checked }; }
+    return { node: node, values: values };
+  }
+
+  function openCourseForm() {
+    var f = courseFieldSet(null), msg = h('div', { class: 'form-msg' });
+    var modal = buildModal('Yangi kurs', h('div', {}, f.node, msg), [
+      h('div', { style: { flex: '1' } }),
+      h('button', { class: 'btn btn-ghost', text: 'Bekor', on: { click: function () { modal.remove(); } } }),
+      h('button', { class: 'btn btn-primary', text: 'Qo‘shish', on: { click: save } })
+    ]);
+    async function save() { var v = f.values(); if ((v.title || '').trim().length < 2) { msg.className = 'form-msg bad'; msg.textContent = 'Nomini kiriting.'; return; } try { await api('/api/admin/courses', { method: 'POST', body: v }); toast('Kurs qo‘shildi', 'good'); modal.remove(); if (state.route === 'courses') navigate(); } catch (e) { msg.className = 'form-msg bad'; msg.textContent = 'Xatolik.'; } }
+  }
+
+  async function openCourse(id) {
+    var data;
+    try { data = await api('/api/admin/courses/' + id); } catch (e) { return toast('Yuklab bo‘lmadi', 'bad'); }
+    var c = data.course, f = courseFieldSet(c);
+    var lessonsWrap = h('div', {});
+    function renderLessons(lessons) {
+      clear(lessonsWrap);
+      if (!lessons.length) { lessonsWrap.appendChild(h('div', { class: 'muted', style: { fontSize: '.85rem' }, text: 'Dars yo‘q.' })); return; }
+      lessons.forEach(function (l) {
+        lessonsWrap.appendChild(h('div', { class: 'dist-row' },
+          h('span', { class: 'name', style: { width: 'auto' }, text: l.title }),
+          l.material ? h('span', { class: 'muted', style: { fontSize: '.78rem', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: '150px' }, text: l.material }) : null,
+          h('button', { class: 'icon-btn', style: { marginLeft: 'auto' }, html: ICON.edit, attrs: { title: 'Tahrirlash' }, on: { click: function () { openLessonForm(id, l, reload); } } }),
+          h('button', { class: 'icon-btn', html: ICON.trash, attrs: { title: 'O‘chirish' }, on: { click: function () { delLesson(l.id); } } })
+        ));
+      });
+    }
+    renderLessons(data.lessons || []);
+    function reload() { api('/api/admin/courses/' + id).then(function (d) { renderLessons(d.lessons || []); }).catch(function () {}); }
+    async function delLesson(lid) { if (!confirm('Darsni o‘chirasizmi?')) return; try { await api('/api/admin/lessons/' + lid, { method: 'DELETE' }); reload(); } catch (e) { toast('Xatolik', 'bad'); } }
+    var body = h('div', {}, f.node,
+      h('div', { class: 'card-title', style: { marginTop: '1rem', display: 'flex', alignItems: 'center' } }, h('span', { text: 'Darslar' }),
+        h('button', { class: 'btn btn-ghost btn-sm', style: { marginLeft: 'auto' }, html: ICON.plus + '<span>Dars</span>', on: { click: function () { openLessonForm(id, null, reload); } } })),
+      lessonsWrap);
+    var modal = buildModal(c.title, body, [
+      h('button', { class: 'btn btn-danger', html: ICON.trash + '<span>O‘chirish</span>', on: { click: del } }),
+      h('div', { style: { flex: '1' } }),
+      h('button', { class: 'btn btn-ghost', text: 'Yopish', on: { click: function () { modal.remove(); } } }),
+      h('button', { class: 'btn btn-primary', text: 'Saqlash', on: { click: save } })
+    ]);
+    async function save() { var v = f.values(); if ((v.title || '').trim().length < 2) { toast('Nomini kiriting', 'bad'); return; } try { await api('/api/admin/courses/' + id, { method: 'PATCH', body: v }); toast('Saqlandi', 'good'); modal.remove(); if (state.route === 'courses') navigate(); } catch (e) { toast('Xatolik', 'bad'); } }
+    async function del() { if (!confirm('Kursni va barcha darslarini o‘chirasizmi?')) return; try { await api('/api/admin/courses/' + id, { method: 'DELETE' }); toast('O‘chirildi', 'good'); modal.remove(); if (state.route === 'courses') navigate(); } catch (e) { toast('Xatolik', 'bad'); } }
+  }
+
+  function openLessonForm(courseId, lesson, onDone) {
+    var d = lesson || {};
+    var title = h('input', { class: 'input', value: d.title || '' });
+    var material = h('textarea', { class: 'textarea', value: d.material || '', attrs: { placeholder: 'Matn yoki havola (URL)…' } });
+    var sort = h('input', { class: 'input', type: 'number', value: (d.sort != null ? d.sort : 0) });
+    var msg = h('div', { class: 'form-msg' });
+    var modal = buildModal(lesson ? 'Darsni tahrirlash' : 'Yangi dars', h('div', {}, field('Sarlavha', title), field('Material', material), field('Tartib', sort), msg), [
+      h('div', { style: { flex: '1' } }),
+      h('button', { class: 'btn btn-ghost', text: 'Bekor', on: { click: function () { modal.remove(); } } }),
+      h('button', { class: 'btn btn-primary', text: 'Saqlash', on: { click: save } })
+    ]);
+    async function save() {
+      var b = { course_id: courseId, title: title.value, material: material.value, sort: Number(sort.value) || 0 };
+      if ((b.title || '').trim().length < 2) { msg.className = 'form-msg bad'; msg.textContent = 'Sarlavhani kiriting.'; return; }
+      try { await api(lesson ? ('/api/admin/lessons/' + lesson.id) : '/api/admin/lessons', { method: lesson ? 'PATCH' : 'POST', body: b }); toast('Saqlandi', 'good'); modal.remove(); if (typeof onDone === 'function') onDone(); }
+      catch (e) { msg.className = 'form-msg bad'; msg.textContent = 'Xatolik.'; }
+    }
   }
 
   /* =====================================================================

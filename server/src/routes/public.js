@@ -7,6 +7,7 @@
 const express = require('express');
 const rateLimit = require('express-rate-limit');
 const db = require('../db');
+const telegram = require('../telegram');
 const { ah, cleanStr, isName, normPhone, oneOf, clampInt } = require('../util');
 
 const router = express.Router();
@@ -57,6 +58,19 @@ router.post('/applications', submitLimiter, ah((req, res) => {
         (@student_first,@student_last,@grade,@student_phone,@address,@interests,@parent_name,@parent_phone,@division,@ip)`
     )
     .run(rec);
+
+  // Telegram bildirishnoma (fire-and-forget — javobni bloklamaydi)
+  try {
+    const divLabel = { '1': '1-4 sinf', '2': '5-8 sinf', '3': '9-11 sinf' }[rec.division] || '—';
+    const e = telegram.esc;
+    telegram.sendMessage(
+      '🎓 <b>Yangi ariza</b>\n' +
+      '👤 ' + e(rec.student_first + ' ' + rec.student_last) + '\n' +
+      '📚 Boʻlim: ' + e(divLabel) + (rec.grade ? ' (' + e(rec.grade) + ')' : '') + '\n' +
+      '📞 ' + e(rec.student_phone || '—') + '\n' +
+      '👨‍👩‍👧 Ota-ona: ' + e(rec.parent_name || '—') + ' ' + e(rec.parent_phone || '')
+    );
+  } catch (e) { /* bildirishnoma xatosi arizani buzmasligi kerak */ }
 
   res.status(201).json({ ok: true, id: info.lastInsertRowid });
 }));

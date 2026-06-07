@@ -6,6 +6,7 @@
 const express = require('express');
 const db = require('../db');
 const auth = require('../auth');
+const telegram = require('../telegram');
 const { ah, cleanStr, oneOf, clampInt, toInt, toCsv } = require('../util');
 
 const router = express.Router();
@@ -23,6 +24,9 @@ router.get('/stats', ah((req, res) => {
     todayApps: one("SELECT COUNT(*) c FROM applications WHERE date(created_at)=date('now')"),
     enrolled: one("SELECT COUNT(*) c FROM applications WHERE status='enrolled'"),
     totalTests: one('SELECT COUNT(*) c FROM test_results'),
+    totalStudents: one('SELECT COUNT(*) c FROM students'),
+    activeStudents: one("SELECT COUNT(*) c FROM students WHERE status='active'"),
+    monthRevenue: one("SELECT COALESCE(SUM(amount),0) c FROM payments WHERE status='paid' AND period=strftime('%Y-%m','now')"),
     byStatus: db.prepare('SELECT status, COUNT(*) c FROM applications GROUP BY status').all(),
     byDivision: db.prepare('SELECT division, COUNT(*) c FROM applications GROUP BY division').all(),
     byTier: db
@@ -163,6 +167,10 @@ const SETTING_KEYS = [
   'public.telegram',
   'public.instagram',
   'public.workingHours',
+  // Telegram bildirishnoma sozlamalari
+  'telegram.enabled',
+  'telegram.bot_token',
+  'telegram.chat_id',
 ];
 
 router.get('/settings', ah((req, res) => {
@@ -188,6 +196,13 @@ router.put('/settings', ah((req, res) => {
   tx(b);
   auth.audit(req.user.id, 'settings_update', '', req.ip);
   res.json({ ok: true });
+}));
+
+// Telegram test xabari
+router.post('/telegram/test', ah(async (req, res) => {
+  const r = await telegram.sendTest();
+  auth.audit(req.user.id, 'telegram_test', r.ok ? 'ok' : (r.error || ('status:' + r.status) || 'fail'), req.ip);
+  res.json(r);
 }));
 
 /* ---- Audit jurnali ---- */

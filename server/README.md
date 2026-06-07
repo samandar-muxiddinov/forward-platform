@@ -1,7 +1,9 @@
 # FORWARD — Backend & Admin (Phase 2)
 
 Ta'lim platformasi uchun backend API va admin boshqaruv paneli.
-Arizalar, test natijalari va sozlamalarni boshqarish; statistika; xavfsiz kirish.
+Modullar: **arizalar**, **o'quvchilar**, **to'lovlar (qarzdorlar bilan)**,
+**kurslar/darslar**, **test natijalari**, **Telegram bildirishnoma**, statistika,
+sozlamalar va audit — barchasi xavfsiz kirish ostida.
 
 ## Texnologiya
 - **Node.js + Express** — API server
@@ -38,11 +40,15 @@ npm run create-admin   # admin yaratish/parol tiklash: node src/create-admin.js 
 **Auth:** `POST /api/auth/login` · `POST /api/auth/logout` · `GET /api/auth/me`
 
 **Admin (kirish + admin rol talab qilinadi):**
-- `GET /api/admin/stats` — dashboard statistikasi
+- `GET /api/admin/stats` — dashboard statistikasi (arizalar, o'quvchilar, tushum)
 - `GET/PATCH/DELETE /api/admin/applications[/:id]` — arizalar
+- `POST /api/admin/applications/:id/enroll` — arizadan o'quvchi yaratish
 - `GET /api/admin/export/applications.csv` — CSV eksport
+- `GET/POST/PATCH/DELETE /api/admin/students[/:id]` — o'quvchilar
+- `GET/POST/DELETE /api/admin/payments` · `GET /api/admin/payments/summary` — to'lovlar
+- `GET/POST/PATCH/DELETE /api/admin/courses[/:id]` · `.../lessons` — kurslar va darslar
 - `GET /api/admin/results` — test natijalari
-- `GET/PUT /api/admin/settings` — aloqa sozlamalari
+- `GET/PUT /api/admin/settings` · `POST /api/admin/telegram/test` — sozlamalar
 - `GET /api/admin/audit` — audit jurnali
 - `POST /api/admin/account/password` — parolni o'zgartirish
 

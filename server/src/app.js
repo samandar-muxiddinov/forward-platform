@@ -60,6 +60,9 @@ function corsPublic(req, res, next) {
 app.get('/api/health', (req, res) => res.json({ ok: true, ts: Date.now() }));
 app.use('/api/auth', authRoutes);
 app.use('/api/admin', adminRoutes);
+app.use('/api/admin', require('./routes/admin.students'));
+app.use('/api/admin', require('./routes/admin.payments'));
+app.use('/api/admin', require('./routes/admin.courses'));
 app.use('/api', corsPublic, publicRoutes);
 
 // 404 — har qanday boshqa /api so'rovi

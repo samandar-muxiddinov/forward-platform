@@ -87,6 +87,64 @@ function migrate() {
     ip         TEXT,
     created_at TEXT NOT NULL DEFAULT (datetime('now'))
   );
+
+  -- ===== Phase 2b: o'quvchilar, to'lovlar, kurslar =====
+  CREATE TABLE IF NOT EXISTS students (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    full_name     TEXT NOT NULL,
+    phone         TEXT DEFAULT '',
+    grade         TEXT DEFAULT '',
+    division      TEXT DEFAULT '',
+    tier          TEXT DEFAULT '',
+    status        TEXT NOT NULL DEFAULT 'active',   -- active|paused|graduated|archived
+    parent_name   TEXT DEFAULT '',
+    parent_phone  TEXT DEFAULT '',
+    address       TEXT DEFAULT '',
+    notes         TEXT DEFAULT '',
+    application_id INTEGER REFERENCES applications(id) ON DELETE SET NULL,
+    created_at    TEXT NOT NULL DEFAULT (datetime('now')),
+    updated_at    TEXT NOT NULL DEFAULT (datetime('now'))
+  );
+  CREATE INDEX IF NOT EXISTS idx_students_status ON students(status);
+  CREATE INDEX IF NOT EXISTS idx_students_phone  ON students(phone);
+
+  CREATE TABLE IF NOT EXISTS payments (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    student_id INTEGER NOT NULL REFERENCES students(id) ON DELETE CASCADE,
+    amount     REAL NOT NULL DEFAULT 0,
+    currency   TEXT NOT NULL DEFAULT 'soʻm',
+    plan       TEXT DEFAULT '',            -- nexus|dominion|imperial|custom
+    method     TEXT DEFAULT '',            -- Payme|Click|Uzum|Naqd
+    period     TEXT DEFAULT '',            -- 'YYYY-MM'
+    status     TEXT NOT NULL DEFAULT 'paid', -- paid|pending
+    note       TEXT DEFAULT '',
+    paid_at    TEXT,
+    created_at TEXT NOT NULL DEFAULT (datetime('now'))
+  );
+  CREATE INDEX IF NOT EXISTS idx_payments_student ON payments(student_id);
+  CREATE INDEX IF NOT EXISTS idx_payments_period  ON payments(period);
+
+  CREATE TABLE IF NOT EXISTS courses (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    title       TEXT NOT NULL,
+    division    TEXT DEFAULT '',
+    tier        TEXT DEFAULT '',
+    description TEXT DEFAULT '',
+    sort        INTEGER NOT NULL DEFAULT 0,
+    active      INTEGER NOT NULL DEFAULT 1,
+    created_at  TEXT NOT NULL DEFAULT (datetime('now'))
+  );
+
+  CREATE TABLE IF NOT EXISTS lessons (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    course_id  INTEGER NOT NULL REFERENCES courses(id) ON DELETE CASCADE,
+    title      TEXT NOT NULL,
+    material   TEXT DEFAULT '',            -- matn yoki havola (URL)
+    sort       INTEGER NOT NULL DEFAULT 0,
+    active     INTEGER NOT NULL DEFAULT 1,
+    created_at TEXT NOT NULL DEFAULT (datetime('now'))
+  );
+  CREATE INDEX IF NOT EXISTS idx_lessons_course ON lessons(course_id);
   `);
 }
 migrate();

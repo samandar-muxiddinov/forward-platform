@@ -19,6 +19,10 @@ Phase 2 da bajarilgani:
   daraja testi → `/api/test-results` (telefon orqali arizaga bog'lanadi).
   Server o'chiq bo'lsa — brauzerga zaxira. HTTPS orqali e2e sinovdan o'tdi.
 - Hammasi lokal sinovdan o'tdi (14/14 API + e2e, skrinshotlar: desktop+mobil)
+- **Phase 2b — admin kengaytmasi ✅**: O'quvchilar boshqaruvi (enroll, profil,
+  bog'langan testlar), To'lovlar (tushum/qarzdorlar/usul, qo'shish-o'chirish),
+  Kurslar va darslar (CRUD), Telegram bildirishnoma (yangi arizada xabar + test).
+  Backend (curl) va UI (skrinshot) sinovdan o'tdi.
 
 ## 2. Qabul qilingan qarorlar
 - Yo'l: avval admin+backend (to'liq nazorat), keyin sayt dizayni/animatsiya/mobil.
@@ -26,12 +30,13 @@ Phase 2 da bajarilgani:
 
 ## 3. ⭐ KEYINGI ISHLAR (navbat bilan)
 1. ✅ ~~Saytni backend'ga ulash~~ — BAJARILDI (forma + test → API, telefon bog'lash).
-2. **Gerb/logoni soddalashtirish** (foydalanuvchi ko'rsatmasi 2026-06-07):
+2. ✅ ~~Admin kengaytmasi~~ — BAJARILDI (o'quvchilar, to'lovlar, kurslar, Telegram).
+3. **Gerb/logoni soddalashtirish** (foydalanuvchi ko'rsatmasi 2026-06-07):
    "belgilar juda murakkab... darajalar unvon kabi ko'rinsin, ammo soddaroq;
    logo sodda, professional, ortiqcha bezaksiz." → `assets/logos/*.svg` ni qayta ishlash.
-3. **Sayt dizayni:** animatsiya, matnlar, mobil ko'rinish sayqali.
-4. (Ixtiyoriy) O'quvchi/ota-ona kabinetlari (hozir faqat admin bor).
-5. **Deploy:** hosting tanlash (Render/Railway/VPS) + domen + SESSION_SECRET.
+4. **Sayt dizayni:** animatsiya, matnlar, mobil ko'rinish sayqali.
+5. (Ixtiyoriy) O'quvchi/ota-ona uchun shaxsiy kabinet (hozir faqat admin tomoni bor).
+6. **Deploy:** hosting tanlash (Render/Railway/VPS) + domen + SESSION_SECRET.
    ⚠️ Jonli saytda backend HTTPS bo'lishi shart (CSP upgrade-insecure-requests).
 
 ## 4. FOYDALANUVCHIDAN KERAK (so'ralganda)
